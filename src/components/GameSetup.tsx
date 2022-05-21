@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useContext, useRef, useState } from "react";
+import React, { useContext } from "react";
 
 import { GameContext } from "../store/game-context";
 import { PlayerEnum, Setup } from "../models/game";
@@ -7,6 +7,7 @@ import {
   Button,
   Container,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   HStack,
@@ -15,74 +16,130 @@ import {
   RadioGroup,
   VStack,
 } from "@chakra-ui/react";
-import { GrWaypoint } from "react-icons/gr";
+import { GrCaretNext } from "react-icons/gr";
+import { Field, Formik } from "formik";
+import * as Yup from "yup";
 
 const GameSetup: React.FC = () => {
   const gameCtx = useContext(GameContext);
   const navigate = useNavigate();
 
-  const playerOneInputRef = useRef<HTMLInputElement>(null);
-  const playerTwoInputRef = useRef<HTMLInputElement>(null);
-  const targetScoreInputRef = useRef<HTMLInputElement>(null);
-  const [selectedStartingPlayer, setSelectedStartingPlayer] =
-    useState<PlayerEnum>(PlayerEnum.PLAYER_ONE);
-
-  const startingPlayerHandler = (value: string) => {
-    setSelectedStartingPlayer(() => value as PlayerEnum);
-  };
-
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    const setupInfo: Setup = {
-      playerOne: playerOneInputRef.current!.value,
-      playerTwo: playerTwoInputRef.current!.value,
-      targetScore: parseInt(targetScoreInputRef.current!.value),
-      startingPlayer: selectedStartingPlayer,
-    };
-    gameCtx.startGame(setupInfo);
-    navigate("/game", { replace: true });
-  };
-
   return (
     <Container maxW="container.md" py={10}>
-      <Heading fontSize="5xl">Game Setup</Heading>
-      <form onSubmit={submitHandler}>
-        <VStack spacing={4} align="flex-start">
-          <FormControl>
-            <FormLabel htmlFor="player-one">Player One</FormLabel>
-            <Input type="text" id="player-one" ref={playerOneInputRef} />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="player-two">Player Two</FormLabel>
-            <Input type="text" id="player-two" ref={playerTwoInputRef} />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="target-score">Target Score</FormLabel>
-            <Input type="number" id="target-score" ref={targetScoreInputRef} />
-          </FormControl>
-          <FormControl as="fieldset">
-            <FormLabel htmlFor="starting-player">Starting player</FormLabel>
-            <RadioGroup
-              defaultValue={PlayerEnum.PLAYER_ONE}
-              onChange={startingPlayerHandler}
-            >
-              <HStack spacing="24px">
-                <Radio value={PlayerEnum.PLAYER_ONE}>Player One</Radio>
-                <Radio value={PlayerEnum.PLAYER_TWO}>Player Two</Radio>
-              </HStack>
-            </RadioGroup>
-          </FormControl>
-          <Button
-            variant="outline"
-            type="submit"
-            rounded="full"
-            rightIcon={React.createElement(GrWaypoint)}
-          >
-            Start Game
-          </Button>
-        </VStack>
-      </form>
+      <Heading fontSize="3xl">Game Setup</Heading>
+      <Formik
+        initialValues={{
+          playerOne: "",
+          playerTwo: "",
+          targetScore: 50,
+          startingPlayer: PlayerEnum.PLAYER_ONE,
+        }}
+        validationSchema={Yup.object({
+          playerOne: Yup.string().required(
+            "A name for player one is required."
+          ),
+          playerTwo: Yup.string().required(
+            "A name for player two is required."
+          ),
+          targetScore: Yup.number()
+            .min(40, "That race is too short.")
+            .max(250, "That race is too long.")
+            .required("Targetscore is required."),
+          startingPlayer: Yup.string().required("Someone has to start."),
+        })}
+        onSubmit={(setupInfo) => {
+          gameCtx.startGame(setupInfo as Setup);
+          navigate("/game", { replace: true });
+        }}
+      >
+        {({ errors, touched, handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <VStack spacing={4} align="flex-start">
+              <FormControl
+                isInvalid={!!errors.playerOne && !!touched.playerOne}
+              >
+                <FormLabel htmlFor="player-one">Player One</FormLabel>
+                <Field
+                  as={Input}
+                  type="text"
+                  id="player-one"
+                  name="playerOne"
+                  variant="filled"
+                  placeholder="player one"
+                />
+                {!!errors.playerOne && !!touched.playerOne ? (
+                  <FormErrorMessage>{errors.playerOne}</FormErrorMessage>
+                ) : null}
+              </FormControl>
+              <FormControl
+                isInvalid={!!errors.playerTwo && !!touched.playerTwo}
+              >
+                <FormLabel htmlFor="player-two">Player Two</FormLabel>
+                <Field
+                  as={Input}
+                  type="text"
+                  id="player-two"
+                  name="playerTwo"
+                  variant="filled"
+                  placeholder="player two"
+                />
+                {!!errors.playerTwo && !!touched.playerTwo ? (
+                  <FormErrorMessage>{errors.playerTwo}</FormErrorMessage>
+                ) : null}
+              </FormControl>
+              <FormControl
+                isInvalid={!!errors.targetScore && !!touched.targetScore}
+              >
+                <FormLabel htmlFor="target-score">Target Score</FormLabel>
+                <Field
+                  as={Input}
+                  type="number"
+                  id="target-score"
+                  name="targetScore"
+                  variant="filled"
+                  placeholder="target score"
+                />
+                {!!errors.targetScore && !!touched.targetScore ? (
+                  <FormErrorMessage>{errors.targetScore}</FormErrorMessage>
+                ) : null}
+              </FormControl>
+              <FormControl as="fieldset">
+                <FormLabel>Starting player</FormLabel>
+                <RadioGroup defaultValue={PlayerEnum.PLAYER_ONE}>
+                  <HStack spacing="24px">
+                    <Field
+                      as={Radio}
+                      id="player-one-starts"
+                      name="startingPlayer"
+                      value={PlayerEnum.PLAYER_ONE}
+                    />
+                    <FormLabel htmlFor="player-one-starts">
+                      Player One
+                    </FormLabel>
+                    <Field
+                      as={Radio}
+                      id="player-two-starts"
+                      name="startingPlayer"
+                      value={PlayerEnum.PLAYER_TWO}
+                    />
+                    <FormLabel htmlFor="player-two-starts">
+                      Player Two
+                    </FormLabel>
+                  </HStack>
+                </RadioGroup>
+              </FormControl>
+              <Button
+                type="submit"
+                variant="solid"
+                colorScheme="green"
+                rightIcon={React.createElement(GrCaretNext)}
+              >
+                Start Game
+              </Button>
+            </VStack>
+          </form>
+        )}
+      </Formik>
     </Container>
   );
 };

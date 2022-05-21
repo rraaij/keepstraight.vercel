@@ -25,7 +25,9 @@
     "@chakra-ui/icons": "^2.0.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "framer-motion": "^6.3.3"
+    "framer-motion": "^6.3.3",
+    "formik": "^2.2.9",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
