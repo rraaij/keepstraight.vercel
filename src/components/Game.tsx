@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
-import { GameContext } from "../store/game-context";
+import React from "react";
+import store from "../store/store";
+import { observer } from "mobx-react";
 
 const Game: React.FC = () => {
-  const gameCtx = useContext(GameContext);
-
   return (
     <React.Fragment>
-      <p>{gameCtx.setup?.playerOne}</p>
-      <p>{gameCtx.setup?.playerTwo}</p>
-      <p>{gameCtx.setup?.targetScore}</p>
-      <p>{gameCtx.setup?.startingPlayer}</p>
-      <p>{gameCtx.ballsOnTable}</p>
-      <p>{gameCtx.scores.length}</p>
+      <p>{store.setup?.playerOne}</p>
+      <p>{store.setup?.playerTwo}</p>
+      <p>{store.setup?.targetScore}</p>
+      <p>{store.setup?.startingPlayer}</p>
+      <p>{store.ballsOnTable}</p>
+      <p>{store.scores.length}</p>
     </React.Fragment>
   );
 };
-export default Game;
+export default observer(Game);

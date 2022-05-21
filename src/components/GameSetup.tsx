@@ -1,6 +1,4 @@
-import React, { useContext } from "react";
-
-import { GameContext } from "../store/game-context";
+import React from "react";
 import { PlayerEnum, Setup } from "../models/game";
 import { useNavigate } from "react-router-dom";
 import {
@@ -19,9 +17,10 @@ import {
 import { GrCaretNext } from "react-icons/gr";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
+import { observer } from "mobx-react";
+import store from "../store/store";
 
 const GameSetup: React.FC = () => {
-  const gameCtx = useContext(GameContext);
   const navigate = useNavigate();
 
   return (
@@ -48,7 +47,7 @@ const GameSetup: React.FC = () => {
           startingPlayer: Yup.string().required("Someone has to start."),
         })}
         onSubmit={(setupInfo) => {
-          gameCtx.startGame(setupInfo as Setup);
+          store.startGame(setupInfo as Setup);
           navigate("/game", { replace: true });
         }}
       >
@@ -144,4 +143,4 @@ const GameSetup: React.FC = () => {
   );
 };
 
-export default GameSetup;
+export default observer(GameSetup);
