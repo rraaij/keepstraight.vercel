@@ -1,14 +1,24 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Link, Box, Center, Flex, Heading, VStack } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   return (
     <React.Fragment>
-      <h1>Keepstraight</h1>
-      <nav>
-        <Link to="/setup">Setup</Link> | <Link to="/game">Game</Link>
-      </nav>
-      <Outlet />
+      <Center bg="gray.200">
+        <Heading>Keepstraight</Heading>
+      </Center>
+      <Flex direction="row">
+        <Box bg="gray.200" w="200px">
+          <VStack>
+            <Link href="/setup">Setup</Link>
+            <Link href="/game">Game</Link>
+          </VStack>
+        </Box>
+        <Box flex="1">
+          <Outlet />
+        </Box>
+      </Flex>
     </React.Fragment>
   );
 };

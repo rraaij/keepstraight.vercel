@@ -2,17 +2,17 @@ import React from "react";
 import { PlayerEnum, Setup } from "../models/game";
 import { useNavigate } from "react-router-dom";
 import {
-  Button,
-  Container,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-  Radio,
-  RadioGroup,
-  VStack,
+    Container,
+    Button,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Heading,
+    HStack,
+    Input,
+    Radio,
+    RadioGroup,
+    VStack,
 } from "@chakra-ui/react";
 import { GrCaretNext } from "react-icons/gr";
 import { Field, Formik } from "formik";
@@ -24,12 +24,12 @@ const GameSetup: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Container maxW="container.md" py={10}>
+    <Container py={10}>
       <Heading fontSize="3xl">Game Setup</Heading>
       <Formik
         initialValues={{
-          playerOne: "",
-          playerTwo: "",
+          playerOne: "SVB",
+          playerTwo: "FSR",
           targetScore: 50,
           startingPlayer: PlayerEnum.PLAYER_ONE,
         }}
