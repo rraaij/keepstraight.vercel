@@ -35,4 +35,5 @@ It correctly bundles React in production mode and optimizes the build for the be
 - [MobX](https://mobx.js.org/README.html)
 - [React Query](https://react-query.tanstack.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- Chakra UI
 - [MUI component lib](https://mui.com/material-ui/getting-started/installation/)
