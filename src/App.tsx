@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Link, Flex, VStack, Center, Heading } from "@chakra-ui/react";
+import { Link, Flex, VStack } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   return (
@@ -18,12 +18,7 @@ const App: React.FC = () => {
         borderRightColor="gray.100"
         borderRightWidth={1}
       >
-        <VStack w="full">
-          <Center bg="gray.100" w="full">
-            <Heading>Keepstraight</Heading>
-          </Center>
           <Outlet />
-        </VStack>
       </Flex>
     </React.Fragment>
   );

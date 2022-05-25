@@ -16,7 +16,6 @@ export enum PlayerEnum {
 }
 
 export type Score = {
-  id: number;
   player: PlayerEnum;
   inning: number;
   score: number;
