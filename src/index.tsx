@@ -4,13 +4,13 @@ import App from "./App";
 import GameSetup from "./components/GameSetup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Game from "./components/Game";
-import { ChakraProvider, Container } from "@chakra-ui/react";
+import { ChakraProvider, HStack } from "@chakra-ui/react";
 import theme from "./theme";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <ChakraProvider theme={theme}>
     <BrowserRouter>
-      <Container as="nav" minW="container.lg" h="full">
+      <HStack h="100vh" spacing={0}>
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="setup" element={<GameSetup />} />
@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             {/*<Route path="correction" element={<Correction/>} />*/}
           </Route>
         </Routes>
-      </Container>
+      </HStack>
     </BrowserRouter>
   </ChakraProvider>
 );

@@ -1,23 +1,29 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Link, Box, Center, Flex, Heading, VStack } from "@chakra-ui/react";
+import { Link, Flex, VStack, Center, Heading } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   return (
     <React.Fragment>
-      <Center bg="gray.200">
-        <Heading>Keepstraight</Heading>
-      </Center>
-      <Flex direction="row">
-        <Box bg="gray.200" w="200px">
-          <VStack>
-            <Link href="/setup">Setup</Link>
-            <Link href="/game">Game</Link>
-          </VStack>
-        </Box>
-        <Box flex="1">
+      <Flex as="nav" h="full" maxW={16} w="full" bg="gray.100">
+        <VStack p={6} alignItems="center" w="full">
+          <Link href="/setup">Setup</Link>
+          <Link href="/game">Game</Link>
+        </VStack>
+      </Flex>
+      <Flex
+        as="main"
+        h="full"
+        flex={1}
+        borderRightColor="gray.100"
+        borderRightWidth={1}
+      >
+        <VStack w="full">
+          <Center bg="gray.100" w="full">
+            <Heading>Keepstraight</Heading>
+          </Center>
           <Outlet />
-        </Box>
+        </VStack>
       </Flex>
     </React.Fragment>
   );
