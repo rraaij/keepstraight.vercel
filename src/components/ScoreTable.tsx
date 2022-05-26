@@ -26,17 +26,15 @@ const ScoreTable: React.FC<ScoreTableProps> = ({ player, playerName }) => {
       .reduce((total, score) => total + score, 0);
   };
   return (
-    <VStack w="300px">
+    <VStack>
       <Center>
         {player}: {playerName}
       </Center>
       <TableContainer>
-        <Table size="lg" w="full">
+        <Table size="sm" w={{ base: "140px", md: "220px", lg: "260px" }}>
           <Thead>
             <Tr>
-              <Th isNumeric p={0}>
-                T
-              </Th>
+              <Th p={0}>T</Th>
               <Th isNumeric p={0}>
                 #
               </Th>
@@ -51,9 +49,7 @@ const ScoreTable: React.FC<ScoreTableProps> = ({ player, playerName }) => {
           <Tbody>
             {Scores.filter((s) => s.player === player).map((score, index) => (
               <Tr key={index}>
-                <Td isNumeric p={0}>
-                  {score.inning}
-                </Td>
+                <Td p={0}>{score.inning}</Td>
                 <Td isNumeric p={0}>
                   {score.score}
                 </Td>

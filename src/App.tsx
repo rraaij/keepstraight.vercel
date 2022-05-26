@@ -18,7 +18,7 @@ const App: React.FC = () => {
         borderRightColor="gray.100"
         borderRightWidth={1}
       >
-          <Outlet />
+        <Outlet />
       </Flex>
     </React.Fragment>
   );

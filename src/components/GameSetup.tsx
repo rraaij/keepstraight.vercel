@@ -26,7 +26,7 @@ const GameSetup: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Flex flexDirection="column">
+    <Flex w="full" flexDirection="column">
       <Center bg="gray.100" w="full">
         <Heading>Keepstraight</Heading>
       </Center>
