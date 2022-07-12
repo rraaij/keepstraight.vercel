@@ -1,58 +1,28 @@
 {
-  "name": "keepstraight",
+  "name": "keepstraight-next",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "next dev",
+    "build": "next build",
+    "prod": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^14.2.0",
-    "@types/jest": "^27.5.1",
-    "@types/node": "^17.0.34",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.4",
-    "@types/react-router-dom": "^5.3.3",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.6.4",
-    "mobx": "^6.5.0",
-    "mobx-react": "^7.4.0",
-    "web-vitals": "^2.1.4"
+    "autoprefixer": "^10.4.7",
+    "next": "^12.2.2",
+    "postcss": "^8.4.14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.1.6"
   },
   "devDependencies": {
-    "prettier": "^2.6.2",
-    "react-icons": "^4.3.1",
-    "@chakra-ui/react": "^2.0.2",
-    "@chakra-ui/icons": "^2.0.0",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "framer-motion": "^6.3.3",
-    "formik": "^2.2.9",
-    "yup": "^0.32.11"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@types/node": "^18.0.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "eslint": "^8.19.0",
+    "eslint-config-next": "^12.2.2",
+    "typescript": "^4.7.4",
+    "prettier": "^2.7.1"
   }
 }
