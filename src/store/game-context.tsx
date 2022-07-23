@@ -1,11 +1,11 @@
 import React, { ReactNode, useState } from "react";
-import { Game, Score, Setup } from "../models/game";
+import { Score, SetupInfo } from "../models/game";
 
 type GameContextObj = {
-  setup: Setup | undefined;
+  setup: SetupInfo | undefined;
   scores: Score[];
   ballsOnTable: number;
-  startGame: (setupInfo: Setup) => void;
+  startGame: (setupInfo: SetupInfo) => void;
 };
 
 export const GameContext = React.createContext<GameContextObj>({
@@ -18,12 +18,12 @@ export const GameContext = React.createContext<GameContextObj>({
 const GameContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [gameSetup, setGameSetup] = useState<Setup>({});
+  const [gameSetup, setSetupInfo] = useState<SetupInfo>({});
   const [gameScores, setGameScores] = useState<Score[]>([]);
   const [nrOfBalls, setNrOfBalls] = useState<number>(0);
 
-  const startGameHandler = (setupInfo: Setup) => {
-    setGameSetup(() => setupInfo);
+  const startGameHandler = (setupInfo: SetupInfo) => {
+    setSetupInfo(() => setupInfo);
     setGameScores(() => []);
     setNrOfBalls(() => 15);
   };

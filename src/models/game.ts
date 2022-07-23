@@ -1,9 +1,9 @@
 export type Game = {
-  setup: GameSetup;
+  setup: SetupInfo;
   scores: Score[];
 };
 
-export type GameSetup = {
+export type SetupInfo = {
   playerOne?: string;
   playerTwo?: string;
   targetScore?: number;

@@ -7,7 +7,7 @@ import Setup from "./components/Setup";
 import { ThemeProvider } from "@material-tailwind/react";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <ThemeProvider value="">
+  <ThemeProvider value={{}}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
