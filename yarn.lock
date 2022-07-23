@@ -322,10 +322,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@material-tailwind/react@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-1.0.7.tgz#ec60d0c53cf918f56c299de80f2f26562b4cd7ed"
-  integrity sha512-Dyr4rN3Uk95O6vrQluRBYcQjHyew13NgzMPp7naI2qSmBV6+5UY8pQWMbug8jx5VGgww0+H7IQP/+WMJQbjCSA==
+"@material-tailwind/react@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-1.0.8.tgz#522f0eb156f1a5b46a8289f547a69ceec95463ec"
+  integrity sha512-5ZmwuQxfJyCtlEfmOhxZPTw1gUqNXiHYaDCMWyuCwI+rAbmg3QmS37RoSA0uPE8QoPbO0wLSypHvPrY52y59Pw==
   dependencies:
     "@floating-ui/react-dom-interactions" "^0.6.5"
     classnames "^2.3.1"
@@ -1163,6 +1163,11 @@ react-dom@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-hook-form@^7.33.1:
+  version "7.33.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.33.1.tgz#8c4410e3420788d3b804d62cc4c142915c2e46d0"
+  integrity sha512-ydTfTxEJdvgjCZBj5DDXRc58oTEfnFupEwwTAQ9FSKzykEJkX+3CiAkGtAMiZG7IPWHuzgT6AOBfogiKhUvKgg==
 
 react-is@^16.13.1:
   version "16.13.1"
