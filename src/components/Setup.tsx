@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { SetupInfo, PlayerEnum } from "../models/game";
 import {
@@ -11,11 +11,11 @@ import {
   Radio,
   Typography,
 } from "@material-tailwind/react";
-import { GameContext } from "../store/game-context";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react";
+import store from "../store/store";
 
 const Setup: FC = () => {
-  const gameCtx = useContext(GameContext);
   const navigate = useNavigate();
   const {
     register,
@@ -32,7 +32,7 @@ const Setup: FC = () => {
 
   const startGame = (setupInfo: SetupInfo) => {
     console.log(">>> Submitting:", setupInfo);
-    gameCtx.startGame(setupInfo as SetupInfo);
+    store.startGame(setupInfo as SetupInfo);
     navigate("/game", { replace: true });
   };
 
@@ -141,4 +141,4 @@ const Setup: FC = () => {
     </>
   );
 };
-export default Setup;
+export default observer(Setup);
