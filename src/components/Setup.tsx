@@ -38,98 +38,87 @@ const Setup: FC = () => {
   };
 
   return (
-    <div className="pt-8 w-full flex flex-row justify-center content-end">
-      <Card className="w-96">
-        <CardHeader
-          variant="gradient"
-          color="blue"
-          className="mb-4 grid h-12 place-items-center"
-        >
-          <Typography variant="h5" color="white">
-            Keepstraight
-          </Typography>
-        </CardHeader>
-        <CardBody className="flex flex-col gap-4">
-          <form onSubmit={handleSubmit(startGame)}>
-            <div className="pb-3">
-              <Input
-                type="text"
-                label="Player One"
-                {...register("playerOne", {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 10,
-                })}
-              />
-              {errors.playerOne &&
-                (errors.playerOne.type === "required" ||
-                  errors.playerOne.type === "minLength" ||
-                  errors.playerOne.type === "maxLength") && (
-                  <Typography variant="small" color="red">
-                    Player One needs a name (between 3 and 10 chars)
-                  </Typography>
-                )}
-            </div>
-            <div className="pb-3">
-              <Input
-                type="text"
-                label="Player Two"
-                {...register("playerTwo", {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 10,
-                })}
-              />
-              {errors.playerTwo &&
-                (errors.playerTwo.type === "required" ||
-                  errors.playerTwo.type === "minLength" ||
-                  errors.playerTwo.type === "maxLength") && (
-                  <Typography variant="small" color="red">
-                    Player Two needs a name (between 3 and 10 chars)
-                  </Typography>
-                )}
-            </div>
-            <div className="pb-3">
-              <Input
-                type="number"
-                label="Target score"
-                {...register("targetScore", {
-                  required: true,
-                  min: 30,
-                  max: 1000,
-                })}
-              />
-              {errors.targetScore &&
-                (errors.targetScore.type === "required" ||
-                  errors.targetScore.type === "min" ||
-                  errors.targetScore.type === "max") && (
-                  <Typography variant="small" color="red">
-                    Must have a target score (between 30 and 1000)
-                  </Typography>
-                )}
-            </div>
-            <div className="flex gap-10">
-              <p>Who Starts?</p>
-              <Radio
-                id="playerOne"
-                label="Player One"
-                {...register("startingPlayer")}
-                value={PlayerEnum.PLAYER_ONE}
-                defaultChecked
-              />
-              <Radio
-                id="playerTwo"
-                label="Player Two"
-                {...register("startingPlayer")}
-                value={PlayerEnum.PLAYER_TWO}
-              />
-            </div>
-          </form>
-        </CardBody>
-        <CardFooter className="pt-0">
+    <div className="w-full h-screen flex justify-center bg-blue-200">
+      <div className="p-4 pt-8 w-96 flex flex-col self-center bg-white rounded-2xl">
+        <form onSubmit={handleSubmit(startGame)}>
+          <div className="pb-3">
+            <Input
+              type="text"
+              label="Player One"
+              {...register("playerOne", {
+                required: true,
+                minLength: 3,
+                maxLength: 10,
+              })}
+            />
+            {errors.playerOne &&
+              (errors.playerOne.type === "required" ||
+                errors.playerOne.type === "minLength" ||
+                errors.playerOne.type === "maxLength") && (
+                <Typography variant="small" color="red">
+                  Player One needs a name (between 3 and 10 chars)
+                </Typography>
+              )}
+          </div>
+          <div className="pb-3">
+            <Input
+              type="text"
+              label="Player Two"
+              {...register("playerTwo", {
+                required: true,
+                minLength: 3,
+                maxLength: 10,
+              })}
+            />
+            {errors.playerTwo &&
+              (errors.playerTwo.type === "required" ||
+                errors.playerTwo.type === "minLength" ||
+                errors.playerTwo.type === "maxLength") && (
+                <Typography variant="small" color="red">
+                  Player Two needs a name (between 3 and 10 chars)
+                </Typography>
+              )}
+          </div>
+          <div className="pb-3">
+            <Input
+              type="number"
+              label="Target score"
+              {...register("targetScore", {
+                required: true,
+                min: 30,
+                max: 1000,
+              })}
+            />
+            {errors.targetScore &&
+              (errors.targetScore.type === "required" ||
+                errors.targetScore.type === "min" ||
+                errors.targetScore.type === "max") && (
+                <Typography variant="small" color="red">
+                  Must have a target score (between 30 and 1000)
+                </Typography>
+              )}
+          </div>
+          <div className="flex justify-between">
+            <p className="self-center">Who Starts?</p>
+            <Radio
+              id="playerOne"
+              label={PlayerEnum.PLAYER_ONE}
+              {...register("startingPlayer")}
+              value={PlayerEnum.PLAYER_ONE}
+              defaultChecked
+            />
+            <Radio
+              id="playerTwo"
+              label={PlayerEnum.PLAYER_TWO}
+              {...register("startingPlayer")}
+              value={PlayerEnum.PLAYER_TWO}
+            />
+          </div>
+        </form>
+        <div className="pt-4">
           <Button
             type="button"
-            variant="gradient"
+            variant="filled"
             fullWidth
             onClick={handleSubmit(startGame)}
           >
@@ -138,8 +127,8 @@ const Setup: FC = () => {
               <VscDebugStart className="font-bold text-xl" />
             </div>
           </Button>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

@@ -11,8 +11,8 @@ export type SetupInfo = {
 };
 
 export enum PlayerEnum {
-  PLAYER_ONE = "Speler 1",
-  PLAYER_TWO = "Speler 2",
+  PLAYER_ONE = "Player 1",
+  PLAYER_TWO = "Player 2",
 }
 
 export type Score = {

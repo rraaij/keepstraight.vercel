@@ -3,12 +3,7 @@ import { observer } from "mobx-react";
 import { PlayerEnum, Score } from "../models/game";
 import { SCORE_DATA } from "../assets/score-data";
 
-interface ScoreTableProps {
-  player: PlayerEnum;
-  playerName: string | undefined;
-}
-
-const ScoreTable: React.FC<ScoreTableProps> = ({ player, playerName }) => {
+const ScoreTable: React.FC<{ player: PlayerEnum }> = ({ player }) => {
   const getTotal = (score: Score): number => {
     return SCORE_DATA.filter(
       (s) => s.player === player && s.inning <= score.inning
@@ -18,27 +13,8 @@ const ScoreTable: React.FC<ScoreTableProps> = ({ player, playerName }) => {
   };
   return (
     <div className="flex flex-col px-2 border-x border-blue-200">
-      <div className="text-center text-2xl font-extrabold">
-        {player}: {playerName}
-      </div>
       <div className="flex flex-col">
         <table className="w-full text-xl flex-grow">
-          <thead className="bg-grey-50">
-            <tr>
-              <th className="w-12 border-b font-medium text-gray-500 text-right">
-                T
-              </th>
-              <th className="border-b font-medium text-gray-500 text-right">
-                #
-              </th>
-              <th className="border-b font-medium text-gray-500 text-center">
-                F
-              </th>
-              <th className="border-b font-medium text-gray-500 text-right">
-                S
-              </th>
-            </tr>
-          </thead>
           <tbody className="bg-white h-40">
             {SCORE_DATA.filter((s) => s.player === player).map(
               (score, index) => (
