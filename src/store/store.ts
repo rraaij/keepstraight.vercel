@@ -1,19 +1,36 @@
 import { makeAutoObservable } from "mobx";
-import { Score, Setup } from "../models/game";
+import { PlayerEnum, Score, ScoreUpdateInfo, SetupInfo } from "../models/game";
 
 class Store {
-  setup: Setup | undefined = undefined;
+  setup: SetupInfo = {};
   scores: Score[] = [];
-  ballsOnTable: number = 0;
+  possibleRun: number = 0;
+  playerTurn: PlayerEnum | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  startGame(setupInfo: Setup) {
+  startGame(setupInfo: SetupInfo) {
     this.setup = setupInfo;
     this.scores = [];
-    this.ballsOnTable = 15;
+    this.possibleRun = 15;
+    this.playerTurn = setupInfo.startingPlayer;
+  }
+
+  rerack() {}
+
+  updateScore(scoreUpdateInfo: ScoreUpdateInfo) {
+    const lastInning = this.scores
+      .filter((s) => s.player === this.playerTurn)
+      .map((s) => s.inning)
+      .sort((a, b) => b - a)[0];
+    this.scores.push(<Score>{
+      player: this.playerTurn,
+      inning: lastInning + 1,
+      score: this.possibleRun + scoreUpdateInfo.ballsOnTable,
+      foul: scoreUpdateInfo.endedInFoul,
+    });
   }
 }
 const store = new Store();
