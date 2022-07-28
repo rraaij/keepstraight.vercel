@@ -1,21 +1,33 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { observer } from "mobx-react";
 import store from "../store/store";
 import ScoreTable from "./ScoreTable";
 import ScoreTableHeader from "./ScoreTableHeader";
-import { PlayerEnum } from "../models/game";
-import { Button, IconButton } from "@material-tailwind/react";
+import { PlayerEnum, ScoreUpdateInfo } from "../models/game";
+import { IconButton } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { SCORE_DATA } from "../assets/score-data";
+import ScoreTableFooter from "./ScoreTableFooter";
+import UpdateScore from "./UpdateScore";
 
 const Game: FC = () => {
+  const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const getCurrentScore = (player: PlayerEnum): number =>
     SCORE_DATA.filter((s) => s.player === player)
       .map((s) => s.score)
       .reduce((total, score) => total + score, 0);
+
+  const cancelUpdateHandler = () => {
+    setShowUpdateScore((prevValue) => !prevValue);
+  };
+  const updateScoreHandler = (scoreUpdateInfo: ScoreUpdateInfo) => {
+    console.log(">>> UPDATE SCORE", scoreUpdateInfo);
+    store.updateScore(scoreUpdateInfo);
+    setShowUpdateScore((prevValue) => !prevValue);
+  };
 
   return (
     <div className="flex flex-col m-auto h-screen">
@@ -60,40 +72,23 @@ const Game: FC = () => {
           <ScoreTable player={PlayerEnum.PLAYER_TWO} />
         </div>
       </div>
-      <div className="text-center bg-blue-200 py-4">
-        {/*ACTIONS: current run score, fouls, buttons <Rerack>, <Submit Score> and <Score Correction>*/}
-        <div className="flex flex-row">
-          <div className="flex-grow text-right pr-3 font-bold text-2xl">
-            <p>{getCurrentScore(PlayerEnum.PLAYER_ONE)}</p>
-            <p></p>
-          </div>
-          <div className="flex-grow text-right pr-3 font-bold text-2xl">
-            <p>{getCurrentScore(PlayerEnum.PLAYER_TWO)}</p>
-          </div>
-        </div>
-        <p>
-          #Balls on the table:
-          <span className="font-bold text-2xl pl-2">{store.ballsOnTable}</span>
-        </p>
-        <div className="flex flex-row pt-4">
-          <div className="flex-grow px-3">
-            <Button type="button" variant="filled" size="lg" fullWidth>
-              <span className="font-bold">correction</span>
-            </Button>
-          </div>
-          <div className="flex-grow px-3">
-            <Button
-              type="button"
-              variant="filled"
-              size="lg"
-              fullWidth
-              color="red"
-            >
-              update score
-            </Button>
-          </div>
-        </div>
-      </div>
+
+      {/*ACTIONS: current run score, fouls, buttons <Rerack>, <Submit Score> and <Score Correction>*/}
+      {!showUpdateScore && (
+        <ScoreTableFooter
+          currentScores={[
+            getCurrentScore(PlayerEnum.PLAYER_ONE),
+            getCurrentScore(PlayerEnum.PLAYER_TWO),
+          ]}
+          updateScoreHandler={cancelUpdateHandler}
+        />
+      )}
+      {showUpdateScore && (
+        <UpdateScore
+          cancelUpdate={cancelUpdateHandler}
+          updateScore={updateScoreHandler}
+        />
+      )}
     </div>
   );
 };

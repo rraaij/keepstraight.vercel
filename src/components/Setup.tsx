@@ -1,16 +1,7 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { SetupInfo, PlayerEnum } from "../models/game";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Input,
-  Radio,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import store from "../store/store";

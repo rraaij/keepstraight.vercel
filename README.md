@@ -6,4 +6,4 @@
 - [React Query --- ???](https://react-query.tanstack.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Component Lib](https://www.material-tailwind.com/)
-
+- [redis database](http://www.redis.io)

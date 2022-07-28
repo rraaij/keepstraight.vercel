@@ -13,7 +13,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/" element={<App />}>
           <Route path="setup" element={<Setup />} />
           <Route path="game" element={<Game />} />
-          {/*<Route path="correction" element={<Correction/>} />*/}
         </Route>
       </Routes>
     </BrowserRouter>

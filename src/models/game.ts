@@ -16,9 +16,13 @@ export enum PlayerEnum {
 }
 
 export type Score = {
-  id: number;
   player: PlayerEnum;
   inning: number;
   score: number;
   foul: boolean;
+};
+
+export type ScoreUpdateInfo = {
+  ballsOnTable: number;
+  endedInFoul: boolean;
 };
