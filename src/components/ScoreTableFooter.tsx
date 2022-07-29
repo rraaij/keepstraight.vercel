@@ -24,7 +24,7 @@ const ScoreTableFooter: FC<{
       <div className="flex flex-row pt-4">
         <div className="flex-grow px-3">
           <Button type="button" variant="filled" size="lg" fullWidth>
-            correction
+            rerack
           </Button>
         </div>
         <div className="flex-grow px-3">
