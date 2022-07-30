@@ -1,13 +1,13 @@
 import { Button } from "@material-tailwind/react";
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
 import { selectSetupInfo } from "../store/setup-slice";
+import { useAppSelector } from "../store/store";
 
 const ScoreTableFooter: FC<{
   currentScores: number[];
   updateScoreHandler: () => void;
 }> = (props) => {
-  const setupInfo = useSelector(selectSetupInfo);
+  const setupInfo = useAppSelector(selectSetupInfo);
 
   console.log(">>>FOOTER", setupInfo);
   return (

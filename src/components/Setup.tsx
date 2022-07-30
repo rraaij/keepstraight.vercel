@@ -4,12 +4,12 @@ import { SetupInfo, PlayerEnum } from "../models/game";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { VscDebugStart } from "react-icons/all";
-import { useDispatch } from "react-redux";
 import { startGame } from "../store/setup-slice";
+import { useAppDispatch } from "../store/store";
 
 const Setup: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,

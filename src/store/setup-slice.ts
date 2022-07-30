@@ -1,5 +1,16 @@
-import { PlayerEnum, SetupInfo } from "../models/game";
+import { PlayerEnum, Score, SetupInfo } from "../models/game";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "./store";
+
+interface SetupState {
+  playerOne: string;
+  playerTwo: string;
+  targetScore: number;
+  startingPlayer: PlayerEnum;
+  scores: Score[];
+  possibleRun: number;
+  playerTurn: PlayerEnum;
+}
 
 const initialState = {
   playerOne: "player one",
@@ -9,7 +20,7 @@ const initialState = {
   scores: [],
   possibleRun: 15,
   playerTurn: PlayerEnum.PLAYER_ONE,
-};
+} as SetupState;
 
 const setupSlice = createSlice({
   name: "setup",
@@ -25,8 +36,8 @@ const setupSlice = createSlice({
   },
 });
 
-export const selectSetupInfo = (state: { setup: SetupInfo }) => state.setup;
-
 export const { startGame } = setupSlice.actions;
+
+export const selectSetupInfo = (state: RootState) => state.setup;
 
 export default setupSlice.reducer;

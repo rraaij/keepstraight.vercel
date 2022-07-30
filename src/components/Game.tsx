@@ -1,21 +1,21 @@
 import React, { FC, useState } from "react";
 import ScoreTable from "./ScoreTable";
 import ScoreTableHeader from "./ScoreTableHeader";
-import { PlayerEnum, ScoreUpdateInfo, SetupInfo } from "../models/game";
+import { PlayerEnum, ScoreUpdateInfo } from "../models/game";
 import { IconButton } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { SCORE_DATA } from "../assets/score-data";
 import ScoreTableFooter from "./ScoreTableFooter";
 import UpdateScore from "./UpdateScore";
-import { useSelector } from "react-redux";
 import { selectSetupInfo } from "../store/setup-slice";
+import { useAppSelector } from "../store/store";
 
 const Game: FC = () => {
   const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const setupInfo = useSelector(selectSetupInfo);
+  const setupInfo = useAppSelector(selectSetupInfo);
 
   console.log(">>> GAME", setupInfo);
 
