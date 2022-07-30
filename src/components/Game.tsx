@@ -1,19 +1,23 @@
 import React, { FC, useState } from "react";
-import { observer } from "mobx-react";
-import store from "../store/store";
 import ScoreTable from "./ScoreTable";
 import ScoreTableHeader from "./ScoreTableHeader";
-import { PlayerEnum, ScoreUpdateInfo } from "../models/game";
+import { PlayerEnum, ScoreUpdateInfo, SetupInfo } from "../models/game";
 import { IconButton } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { SCORE_DATA } from "../assets/score-data";
 import ScoreTableFooter from "./ScoreTableFooter";
 import UpdateScore from "./UpdateScore";
+import { useSelector } from "react-redux";
+import { selectSetupInfo } from "../store/setup-slice";
 
 const Game: FC = () => {
   const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const setupInfo = useSelector(selectSetupInfo);
+
+  console.log(">>> GAME", setupInfo);
 
   const getCurrentScore = (player: PlayerEnum): number =>
     SCORE_DATA.filter((s) => s.player === player)
@@ -25,7 +29,7 @@ const Game: FC = () => {
   };
   const updateScoreHandler = (scoreUpdateInfo: ScoreUpdateInfo) => {
     console.log(">>> UPDATE SCORE", scoreUpdateInfo);
-    store.updateScore(scoreUpdateInfo);
+    // store.updateScore(scoreUpdateInfo);
     setShowUpdateScore((prevValue) => !prevValue);
   };
 
@@ -44,21 +48,21 @@ const Game: FC = () => {
           </IconButton>
           <div className="text-left">
             <p>
-              target score: <strong>{store.setup?.targetScore}</strong>
+              target score: <strong>{setupInfo?.targetScore}</strong>
             </p>
             <p>
-              starting player: <strong>{store.setup?.startingPlayer}</strong>
+              starting player: <strong>{setupInfo?.startingPlayer}</strong>
             </p>
           </div>
         </div>
         <div className="flex flex-row border-x border-blue-200">
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_ONE}
-            playerName={store.setup?.playerOne}
+            playerName={setupInfo?.playerOne}
           />
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_TWO}
-            playerName={store.setup?.playerTwo}
+            playerName={setupInfo?.playerTwo}
           />
         </div>
       </div>
@@ -92,4 +96,4 @@ const Game: FC = () => {
     </div>
   );
 };
-export default observer(Game);
+export default Game;

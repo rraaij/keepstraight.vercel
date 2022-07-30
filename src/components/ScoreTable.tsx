@@ -1,5 +1,4 @@
 import React from "react";
-import { observer } from "mobx-react";
 import { PlayerEnum, Score } from "../models/game";
 import { SCORE_DATA } from "../assets/score-data";
 
@@ -39,4 +38,4 @@ const ScoreTable: React.FC<{ player: PlayerEnum }> = ({ player }) => {
   );
 };
 
-export default observer(ScoreTable);
+export default ScoreTable;

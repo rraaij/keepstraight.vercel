@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { SetupInfo, PlayerEnum } from "../models/game";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
-import { observer } from "mobx-react";
-import store from "../store/store";
 import { VscDebugStart } from "react-icons/all";
+import { useDispatch } from "react-redux";
+import { startGame } from "../store/setup-slice";
 
 const Setup: FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -22,16 +23,16 @@ const Setup: FC = () => {
     },
   });
 
-  const startGame = (setupInfo: SetupInfo) => {
+  const start = (setupInfo: SetupInfo) => {
     console.log(">>> Submitting:", setupInfo);
-    store.startGame(setupInfo as SetupInfo);
+    dispatch(startGame(setupInfo));
     navigate("/game", { replace: true });
   };
 
   return (
     <div className="w-full h-screen flex justify-center bg-blue-200">
       <div className="p-4 pt-8 w-96 flex flex-col self-center bg-white rounded-2xl">
-        <form onSubmit={handleSubmit(startGame)}>
+        <form onSubmit={handleSubmit(start)}>
           <div className="pb-3">
             <Input
               type="text"
@@ -111,7 +112,7 @@ const Setup: FC = () => {
             type="button"
             variant="filled"
             fullWidth
-            onClick={handleSubmit(startGame)}
+            onClick={handleSubmit(start)}
           >
             <div className="flex flex-row justify-between">
               <span className="text-sm">Start Game</span>
@@ -123,4 +124,4 @@ const Setup: FC = () => {
     </div>
   );
 };
-export default observer(Setup);
+export default Setup;
