@@ -7,9 +7,6 @@ interface SetupState {
   playerTwo: string;
   targetScore: number;
   startingPlayer: PlayerEnum;
-  scores: Score[];
-  possibleRun: number;
-  playerTurn: PlayerEnum;
 }
 
 const initialState = {
@@ -17,9 +14,6 @@ const initialState = {
   playerTwo: "player two",
   targetScore: 50,
   startingPlayer: PlayerEnum.PLAYER_ONE,
-  scores: [],
-  possibleRun: 15,
-  playerTurn: PlayerEnum.PLAYER_ONE,
 } as SetupState;
 
 const setupSlice = createSlice({
@@ -36,8 +30,10 @@ const setupSlice = createSlice({
   },
 });
 
+// ACTIONS
 export const { startGame } = setupSlice.actions;
 
+// SELECTORS
 export const selectSetupInfo = (state: RootState) => state.setup;
 
 export default setupSlice.reducer;
