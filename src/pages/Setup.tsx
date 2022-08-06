@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { SetupInfo, PlayerEnum } from "../models/game";
+import { SetupInfo, PlayerEnum } from "../models/game.model";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { VscDebugStart } from "react-icons/all";

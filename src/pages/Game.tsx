@@ -1,15 +1,15 @@
 import React, { FC, useState } from "react";
-import ScoreTable from "./ScoreTable";
-import ScoreTableHeader from "./ScoreTableHeader";
-import { PlayerEnum, ScoreUpdateInfo } from "../models/game";
+import ScoreTable from "../components/ScoreTable";
+import ScoreTableHeader from "../components/ScoreTableHeader";
+import { PlayerEnum, ScoreUpdateInfo } from "../models/game.model";
 import { IconButton } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { SCORE_DATA } from "../assets/score-data";
-import ScoreTableFooter from "./ScoreTableFooter";
-import UpdateScore from "./UpdateScore";
+import ScoreTableFooter from "../components/ScoreTableFooter";
+import UpdateScore from "../components/UpdateScore";
 import { selectSetupInfo } from "../store/setup-slice";
 import { useAppSelector } from "../store/store";
+import { selectCurrentScoreForPlayer } from "../store/game-slice";
 
 const Game: FC = () => {
   const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
@@ -17,12 +17,8 @@ const Game: FC = () => {
 
   const setupInfo = useAppSelector(selectSetupInfo);
 
-  console.log(">>> GAME", setupInfo);
-
   const getCurrentScore = (player: PlayerEnum): number =>
-    SCORE_DATA.filter((s) => s.player === player)
-      .map((s) => s.score)
-      .reduce((total, score) => total + score, 0);
+    useAppSelector((state) => selectCurrentScoreForPlayer(state, player));
 
   const cancelUpdateHandler = () => {
     setShowUpdateScore((prevValue) => !prevValue);

@@ -320,10 +320,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@material-tailwind/react@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-1.1.0.tgz#b8672f3d9229364eebdf71acf818504de6c62d90"
-  integrity sha512-6PY+az8XucrwcfYU3OO8B6qR6z8PLeBgEuqbnvTxBPXyhwREtyPeNQG4Od3Je5PGHtAWVFpMaiQibp+ZBUW6Cg==
+"@material-tailwind/react@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-1.2.2.tgz#41ac4dc2e6d2bcc4d9c09a1906a3f960bbe58643"
+  integrity sha512-JgkGyHLrcDUTIdqqBIX4wtFd9TwuonF9hkxk3fwdxNltXILWPUB5gjcQrn+u3J8ZtA0J1F49N1Ehx97DSlFr/g==
   dependencies:
     "@floating-ui/react-dom-interactions" "^0.8.1"
     classnames "^2.3.1"
@@ -332,7 +332,7 @@
     framer-motion "^6.5.1"
     material-ripple-effects "^2.0.1"
     prop-types "^15.8.1"
-    react-merge-refs "^2.0.1"
+    react-merge-refs v1.1.0
     tailwind-merge "^1.5.1"
 
 "@motionone/animation@^10.12.0":
@@ -1253,10 +1253,10 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-merge-refs@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-2.0.1.tgz#a1f8c2dadefa635333e9b91ec59f30b65228b006"
-  integrity sha512-pywF6oouJWuqL26xV3OruRSIqai31R9SdJX/I3gP2q8jLxUnA1IwXcLW8werUHLZOrp4N7YOeQNZrh/BKrHI4A==
+react-merge-refs@v1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
+  integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
 react-redux@^8.0.2:
   version "8.0.2"
@@ -1413,10 +1413,10 @@ tailwind-merge@^1.5.1:
   resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.5.1.tgz#fb7d6b724aef702b11fd01fddf1be1d8aeab3d7a"
   integrity sha512-lqmJS6+3vsNQY77TMMRBVFbWyMcIAAD/09Vs+IXCt3cza58/O7X5DBbOu+7p6LPhw0efK45LL8kAJ7IORccMag==
 
-tailwindcss@^3.1.7:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.1.7.tgz#ce99425f30a74e01457a2e6a724463b0df3159ac"
-  integrity sha512-r7mgumZ3k0InfVPpGWcX8X/Ut4xBfv+1O/+C73ar/m01LxGVzWvPxF/w6xIUPEztrCoz7axfx0SMdh8FH8ZvRQ==
+tailwindcss@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.1.8.tgz#4f8520550d67a835d32f2f4021580f9fddb7b741"
+  integrity sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==
   dependencies:
     arg "^5.0.2"
     chokidar "^3.5.3"

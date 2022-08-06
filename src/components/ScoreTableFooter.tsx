@@ -9,7 +9,6 @@ const ScoreTableFooter: FC<{
 }> = (props) => {
   const setupInfo = useAppSelector(selectSetupInfo);
 
-  console.log(">>>FOOTER", setupInfo);
   return (
     <div className="text-center bg-blue-200 py-4">
       <div className="flex flex-row">
@@ -24,7 +23,7 @@ const ScoreTableFooter: FC<{
       <p>
         Possible Run:
         <span className="font-bold text-2xl pl-2">
-          {setupInfo?.possibleRun}
+          {setupInfo?.targetScore}
         </span>
       </p>
       <div className="flex flex-row pt-4">

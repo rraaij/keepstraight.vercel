@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { ScoreUpdateInfo } from "../models/game";
+import { ScoreUpdateInfo } from "../models/game.model";
 
 const UpdateScore: FC<{
   cancelUpdate: () => void;

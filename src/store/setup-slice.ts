@@ -1,4 +1,4 @@
-import { PlayerEnum, Score, SetupInfo } from "../models/game";
+import { PlayerEnum, Score, SetupInfo } from "../models/game.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
