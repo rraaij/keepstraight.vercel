@@ -12,22 +12,9 @@ import { useAppSelector } from "../store/store";
 import { selectCurrentScoreForPlayer } from "../store/game-slice";
 
 const Game: FC = () => {
-  const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const setupInfo = useAppSelector(selectSetupInfo);
-
-  const getCurrentScore = (player: PlayerEnum): number =>
-    useAppSelector((state) => selectCurrentScoreForPlayer(state, player));
-
-  const cancelUpdateHandler = () => {
-    setShowUpdateScore((prevValue) => !prevValue);
-  };
-  const updateScoreHandler = (scoreUpdateInfo: ScoreUpdateInfo) => {
-    console.log(">>> UPDATE SCORE", scoreUpdateInfo);
-    // store.updateScore(scoreUpdateInfo);
-    setShowUpdateScore((prevValue) => !prevValue);
-  };
 
   return (
     <div className="flex flex-col m-auto h-screen">
@@ -72,23 +59,7 @@ const Game: FC = () => {
           <ScoreTable player={PlayerEnum.PLAYER_TWO} />
         </div>
       </div>
-
-      {/*ACTIONS: current run score, fouls, buttons <Rerack>, <Submit Score> and <Score Correction>*/}
-      {!showUpdateScore && (
-        <ScoreTableFooter
-          currentScores={[
-            getCurrentScore(PlayerEnum.PLAYER_ONE),
-            getCurrentScore(PlayerEnum.PLAYER_TWO),
-          ]}
-          updateScoreHandler={cancelUpdateHandler}
-        />
-      )}
-      {showUpdateScore && (
-        <UpdateScore
-          cancelUpdate={cancelUpdateHandler}
-          updateScore={updateScoreHandler}
-        />
-      )}
+      <ScoreTableFooter />
     </div>
   );
 };
