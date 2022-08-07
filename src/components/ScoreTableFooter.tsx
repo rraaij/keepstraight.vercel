@@ -1,14 +1,17 @@
 import { Button } from "@material-tailwind/react";
 import React, { FC } from "react";
-import { selectSetupInfo } from "../store/setup-slice";
 import { useAppSelector } from "../store/store";
 import { PlayerEnum } from "../models/game.model";
-import { selectCurrentScoreForPlayer } from "../store/game-slice";
+import {
+  selectCurrentScoreForPlayer,
+  selectGameInfo,
+} from "../store/game-slice";
 
 const ScoreTableFooter: FC<{
   showScoreUpdate: () => void;
-}> = ({ showScoreUpdate }) => {
-  const setupInfo = useAppSelector(selectSetupInfo);
+  rerack: () => void;
+}> = ({ showScoreUpdate, rerack }) => {
+  const gameInfo = useAppSelector(selectGameInfo);
 
   const getCurrentScore = (player: PlayerEnum): number =>
     useAppSelector((state) => selectCurrentScoreForPlayer(state, player));
@@ -26,13 +29,17 @@ const ScoreTableFooter: FC<{
       </div>
       <p>
         Possible Run:
-        <span className="font-bold text-2xl pl-2">
-          {setupInfo?.targetScore}
-        </span>
+        <span className="font-bold text-2xl pl-2">{gameInfo?.possibleRun}</span>
       </p>
       <div className="flex flex-row pt-4">
         <div className="flex-grow px-3">
-          <Button type="button" variant="filled" size="lg" fullWidth>
+          <Button
+            type="button"
+            variant="filled"
+            size="lg"
+            fullWidth
+            onClick={rerack}
+          >
             rerack
           </Button>
         </div>

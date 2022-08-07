@@ -15,6 +15,7 @@ export type Score = {
   inning: number;
   score: number;
   foul: boolean;
+  total: number;
 };
 
 export type ScoreUpdateInfo = {

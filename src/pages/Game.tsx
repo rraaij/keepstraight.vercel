@@ -8,20 +8,36 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import ScoreTableFooter from "../components/ScoreTableFooter";
 import UpdateScore from "../components/UpdateScore";
 import { selectSetupInfo } from "../store/setup-slice";
-import { useAppSelector } from "../store/store";
-import { selectCurrentScoreForPlayer } from "../store/game-slice";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { rerack, selectGameInfo, updateScore } from "../store/game-slice";
 
 const Game: FC = () => {
   const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const setupInfo = useAppSelector(selectSetupInfo);
+  const gameInfo = useAppSelector(selectGameInfo);
 
-  const switchUpdateHandler = () => {
+  const rerackHandler = () => dispatch(rerack());
+  const switchUpdateHandler = () =>
     setShowUpdateScore((prevValue) => !prevValue);
-  };
-  const updateScoreHandler = (info?: ScoreUpdateInfo) => {
-    console.log(">>> UPDATE SCORE", info);
-    // store.updateScore(scoreUpdateInfo);
+  const updateScoreHandler = (
+    info:
+      | ScoreUpdateInfo
+      | {
+          ballsOnTable: string;
+          endedInFoul: string;
+        }
+  ) => {
+    dispatch(
+      updateScore({
+        ballsOnTable:
+          typeof info.ballsOnTable === "string"
+            ? parseInt(info.ballsOnTable, 10)
+            : info.ballsOnTable,
+        endedInFoul: info.endedInFoul === "true",
+      })
+    );
     switchUpdateHandler();
   };
 
@@ -50,10 +66,12 @@ const Game: FC = () => {
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_ONE}
             playerName={setupInfo?.playerOne}
+            hasTurn={gameInfo.playerTurn}
           />
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_TWO}
             playerName={setupInfo?.playerTwo}
+            hasTurn={gameInfo.playerTurn}
           />
         </div>
       </div>
@@ -68,7 +86,10 @@ const Game: FC = () => {
         </div>
       </div>
       {!showUpdateScore && (
-        <ScoreTableFooter showScoreUpdate={switchUpdateHandler} />
+        <ScoreTableFooter
+          showScoreUpdate={switchUpdateHandler}
+          rerack={rerackHandler}
+        />
       )}
       {showUpdateScore && (
         <UpdateScore

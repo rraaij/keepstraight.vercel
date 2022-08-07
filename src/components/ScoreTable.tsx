@@ -1,19 +1,12 @@
 import React from "react";
 import { PlayerEnum } from "../models/game.model";
 import { useAppSelector } from "../store/store";
-import {
-  selectScoresForPlayer,
-  selectTotalForPlayerAndInning,
-} from "../store/game-slice";
+import { selectScoresForPlayer } from "../store/game-slice";
 
 const ScoreTable: React.FC<{ player: PlayerEnum }> = ({ player }) => {
   const scoresForPlayer = useAppSelector((state) =>
     selectScoresForPlayer(state, player)
   );
-  const getTotal = (inning: number): number =>
-    useAppSelector((state) =>
-      selectTotalForPlayerAndInning(state, player, inning)
-    );
 
   return (
     <div className="flex flex-col px-2 border-x border-blue-200">
@@ -31,7 +24,7 @@ const ScoreTable: React.FC<{ player: PlayerEnum }> = ({ player }) => {
                     </span>
                   )}
                 </td>
-                <td className="px-1 text-right">{getTotal(score.inning)}</td>
+                <td className="px-1 text-right">{score.total}</td>
               </tr>
             ))}
           </tbody>
