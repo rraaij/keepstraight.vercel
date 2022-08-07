@@ -18,8 +18,9 @@ const UpdateScore: FC<{
     },
   });
 
+  // todo: make this component appear in an animation (slide up)
   return (
-    <div className="w-full h-screen flex justify-center bg-blue-200">
+    <div className="flex justify-center bg-blue-200 py-4">
       <div className="p-4 pt-8 w-96 flex flex-col self-center bg-white rounded-2xl">
         <form onSubmit={handleSubmit(props.updateScore)}>
           <div className="pb-3">

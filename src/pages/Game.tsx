@@ -12,13 +12,21 @@ import { useAppSelector } from "../store/store";
 import { selectCurrentScoreForPlayer } from "../store/game-slice";
 
 const Game: FC = () => {
+  const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
   const navigate = useNavigate();
-
   const setupInfo = useAppSelector(selectSetupInfo);
+
+  const switchUpdateHandler = () => {
+    setShowUpdateScore((prevValue) => !prevValue);
+  };
+  const updateScoreHandler = (info?: ScoreUpdateInfo) => {
+    console.log(">>> UPDATE SCORE", info);
+    // store.updateScore(scoreUpdateInfo);
+    switchUpdateHandler();
+  };
 
   return (
     <div className="flex flex-col m-auto h-screen">
-      {/*HEADER: targetScore*/}
       <div className="flex flex-col">
         <div className="flex flex-row bg-blue-200 py-4 justify-between px-3">
           <IconButton
@@ -59,7 +67,15 @@ const Game: FC = () => {
           <ScoreTable player={PlayerEnum.PLAYER_TWO} />
         </div>
       </div>
-      <ScoreTableFooter />
+      {!showUpdateScore && (
+        <ScoreTableFooter showScoreUpdate={switchUpdateHandler} />
+      )}
+      {showUpdateScore && (
+        <UpdateScore
+          cancelUpdate={switchUpdateHandler}
+          updateScore={updateScoreHandler}
+        />
+      )}
     </div>
   );
 };
