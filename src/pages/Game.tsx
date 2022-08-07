@@ -1,37 +1,48 @@
 import React, { FC, useState } from "react";
-import { observer } from "mobx-react";
-import store from "../store/store";
-import ScoreTable from "./ScoreTable";
-import ScoreTableHeader from "./ScoreTableHeader";
-import { PlayerEnum, ScoreUpdateInfo } from "../models/game";
+import ScoreTable from "../components/ScoreTable";
+import ScoreTableHeader from "../components/ScoreTableHeader";
+import { PlayerEnum, ScoreUpdateInfo } from "../models/game.model";
 import { IconButton } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { SCORE_DATA } from "../assets/score-data";
-import ScoreTableFooter from "./ScoreTableFooter";
-import UpdateScore from "./UpdateScore";
+import ScoreTableFooter from "../components/ScoreTableFooter";
+import UpdateScore from "../components/UpdateScore";
+import { selectSetupInfo } from "../store/setup-slice";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { rerack, selectGameInfo, updateScore } from "../store/game-slice";
 
 const Game: FC = () => {
   const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const setupInfo = useAppSelector(selectSetupInfo);
+  const gameInfo = useAppSelector(selectGameInfo);
 
-  const getCurrentScore = (player: PlayerEnum): number =>
-    SCORE_DATA.filter((s) => s.player === player)
-      .map((s) => s.score)
-      .reduce((total, score) => total + score, 0);
-
-  const cancelUpdateHandler = () => {
+  const rerackHandler = () => dispatch(rerack());
+  const switchUpdateHandler = () =>
     setShowUpdateScore((prevValue) => !prevValue);
-  };
-  const updateScoreHandler = (scoreUpdateInfo: ScoreUpdateInfo) => {
-    console.log(">>> UPDATE SCORE", scoreUpdateInfo);
-    store.updateScore(scoreUpdateInfo);
-    setShowUpdateScore((prevValue) => !prevValue);
+  const updateScoreHandler = (
+    info:
+      | ScoreUpdateInfo
+      | {
+          ballsOnTable: string;
+          endedInFoul: string;
+        }
+  ) => {
+    dispatch(
+      updateScore({
+        ballsOnTable:
+          typeof info.ballsOnTable === "string"
+            ? parseInt(info.ballsOnTable, 10)
+            : info.ballsOnTable,
+        endedInFoul: info.endedInFoul === "true",
+      })
+    );
+    switchUpdateHandler();
   };
 
   return (
     <div className="flex flex-col m-auto h-screen">
-      {/*HEADER: targetScore*/}
       <div className="flex flex-col">
         <div className="flex flex-row bg-blue-200 py-4 justify-between px-3">
           <IconButton
@@ -44,21 +55,23 @@ const Game: FC = () => {
           </IconButton>
           <div className="text-left">
             <p>
-              target score: <strong>{store.setup?.targetScore}</strong>
+              target score: <strong>{setupInfo?.targetScore}</strong>
             </p>
             <p>
-              starting player: <strong>{store.setup?.startingPlayer}</strong>
+              starting player: <strong>{setupInfo?.startingPlayer}</strong>
             </p>
           </div>
         </div>
         <div className="flex flex-row border-x border-blue-200">
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_ONE}
-            playerName={store.setup?.playerOne}
+            playerName={setupInfo?.playerOne}
+            hasTurn={gameInfo.playerTurn}
           />
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_TWO}
-            playerName={store.setup?.playerTwo}
+            playerName={setupInfo?.playerTwo}
+            hasTurn={gameInfo.playerTurn}
           />
         </div>
       </div>
@@ -72,24 +85,19 @@ const Game: FC = () => {
           <ScoreTable player={PlayerEnum.PLAYER_TWO} />
         </div>
       </div>
-
-      {/*ACTIONS: current run score, fouls, buttons <Rerack>, <Submit Score> and <Score Correction>*/}
       {!showUpdateScore && (
         <ScoreTableFooter
-          currentScores={[
-            getCurrentScore(PlayerEnum.PLAYER_ONE),
-            getCurrentScore(PlayerEnum.PLAYER_TWO),
-          ]}
-          updateScoreHandler={cancelUpdateHandler}
+          showScoreUpdate={switchUpdateHandler}
+          rerack={rerackHandler}
         />
       )}
       {showUpdateScore && (
         <UpdateScore
-          cancelUpdate={cancelUpdateHandler}
+          cancelUpdate={switchUpdateHandler}
           updateScore={updateScoreHandler}
         />
       )}
     </div>
   );
 };
-export default observer(Game);
+export default Game;

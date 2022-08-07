@@ -1,13 +1,19 @@
 import React, { FC } from "react";
-import { PlayerEnum } from "../models/game";
+import { PlayerEnum } from "../models/game.model";
 
 const ScoreTableHeader: FC<{
   player: PlayerEnum;
   playerName: string | undefined;
-}> = ({ player, playerName }) => {
+  hasTurn: PlayerEnum;
+}> = ({ player, playerName, hasTurn }) => {
   return (
     <div className="flex-grow px-3 pt-3 border-x border-blue-200">
-      <div className="text-center text-2xl font-extrabold">
+      <div
+        className={
+          "text-center text-2xl font-extrabold p-2 " +
+          (hasTurn === player ? "bg-amber-400" : "bg-white")
+        }
+      >
         {player}: {playerName}
       </div>
       <table className="w-full text-xl flex-grow">

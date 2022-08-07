@@ -1,13 +1,8 @@
-export type Game = {
-  setup: SetupInfo;
-  scores: Score[];
-};
-
 export type SetupInfo = {
-  playerOne?: string;
-  playerTwo?: string;
-  targetScore?: number;
-  startingPlayer?: PlayerEnum;
+  playerOne: string;
+  playerTwo: string;
+  targetScore: number;
+  startingPlayer: PlayerEnum;
 };
 
 export enum PlayerEnum {
@@ -20,6 +15,7 @@ export type Score = {
   inning: number;
   score: number;
   foul: boolean;
+  total: number;
 };
 
 export type ScoreUpdateInfo = {

@@ -1,25 +1,29 @@
 import React, { FC } from "react";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { ScoreUpdateInfo } from "../models/game";
+import { ScoreUpdateInfo } from "../models/game.model";
+import { useAppSelector } from "../store/store";
+import { selectGameInfo } from "../store/game-slice";
 
 const UpdateScore: FC<{
   cancelUpdate: () => void;
   updateScore: (info: ScoreUpdateInfo) => void;
 }> = (props) => {
+  const gameInfo = useAppSelector(selectGameInfo);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ScoreUpdateInfo>({
     defaultValues: {
-      ballsOnTable: 15,
+      ballsOnTable: gameInfo.possibleRun < 15 ? gameInfo.possibleRun : 15,
       endedInFoul: false,
     },
   });
 
+  // todo: make this component appear in an animation (slide up)
   return (
-    <div className="w-full h-screen flex justify-center bg-blue-200">
+    <div className="flex justify-center bg-blue-200 py-4">
       <div className="p-4 pt-8 w-96 flex flex-col self-center bg-white rounded-2xl">
         <form onSubmit={handleSubmit(props.updateScore)}>
           <div className="pb-3">
@@ -29,7 +33,7 @@ const UpdateScore: FC<{
               {...register("ballsOnTable", {
                 required: true,
                 min: 2,
-                max: 15,
+                max: gameInfo.possibleRun < 15 ? gameInfo.possibleRun : 15,
               })}
             />
             {errors.ballsOnTable &&
@@ -37,7 +41,8 @@ const UpdateScore: FC<{
                 errors.ballsOnTable.type === "min" ||
                 errors.ballsOnTable.type === "max") && (
                 <Typography variant="small" color="red">
-                  Enter a value between 2 and 15.
+                  Enter a value between 2 and
+                  {gameInfo.possibleRun < 15 ? gameInfo.possibleRun : 15}.
                 </Typography>
               )}
           </div>
