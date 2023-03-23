@@ -76,7 +76,7 @@ const Game: FC = () => {
         </div>
       </div>
       <div className="flex flex-row flex-grow overflow-y-auto bg-gray-200 border-x border-blue-200">
-        <div className="flex-grow">
+        <div className="flex-grow max-w-[50%]">
           {/*LEFT TABLE: player #1 name, scoretable*/}
           <ScoreTable player={PlayerEnum.PLAYER_ONE} />
         </div>

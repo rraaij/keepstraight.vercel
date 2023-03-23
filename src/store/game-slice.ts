@@ -1,7 +1,6 @@
 import { PlayerEnum, Score, ScoreUpdateInfo } from "../models/game.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { SCORE_DATA } from "../assets/score-data";
 
 interface GameState {
   scores: Score[];

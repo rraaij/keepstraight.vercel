@@ -12,7 +12,7 @@ const ScoreTable: React.FC<{ player: PlayerEnum }> = ({ player }) => {
     <div className="flex flex-col px-2 border-x border-blue-200">
       <div className="flex flex-col">
         <table className="w-full text-xl flex-grow">
-          <tbody className="bg-white h-40">
+          <tbody className="bg-white">
             {scoresForPlayer.map((score, index) => (
               <tr key={index}>
                 <td className="w-12 px-1 text-right">{score.inning}</td>
