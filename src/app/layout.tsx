@@ -1,8 +1,8 @@
 import "./globals.css";
 import { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Roboto({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
   title: "Keepstraight",
@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>{children}</body>
     </html>
   );
 }
