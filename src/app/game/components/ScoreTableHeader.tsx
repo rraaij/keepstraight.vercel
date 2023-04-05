@@ -19,7 +19,7 @@ const ScoreTableHeader: FC<{
       <table className="w-full text-xl flex-grow">
         <thead className="bg-grey-50">
           <tr>
-            <th className="w-12 border-b font-medium text-gray-500 text-center text-sm">
+            <th className="border-b font-medium text-gray-500 text-center text-sm">
               T
             </th>
             <th className="border-b font-medium text-gray-500 text-center text-sm">

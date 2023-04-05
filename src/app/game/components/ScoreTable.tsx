@@ -2,9 +2,6 @@ import { Score, PlayerEnum } from "@/models/game.model";
 import { FC } from "react";
 
 const ScoreTable: FC<{ player: PlayerEnum }> = ({ player }) => {
-  // const scoresForPlayer = useAppSelector((state) =>
-  //   selectScoresForPlayer(state, player)
-  // );
   const scoresForPlayer: Score[] = [];
 
   return (
