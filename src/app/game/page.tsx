@@ -1,13 +1,17 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { PlayerEnum } from "@/models/game.model";
+import { PlayerEnum, SetupInfo } from "@/models/game.model";
 import ScoreTableHeader from "@/app/game/components/ScoreTableHeader";
 import ScoreTable from "@/app/game/components/ScoreTable";
 import ScoreTableFooter from "@/app/game/components/ScoreTableFooter";
 import UpdateScore from "@/app/game/components/UpdateScore";
+import { useGameStore } from "@/store/game.store";
 
 const Game = () => {
-  const showUpdateScore = false;
+  const setupInfo: SetupInfo = useGameStore((state) => state.setup);
+  const [showUpdateScore, setShowUpdateScore] = useState<boolean>(false);
 
   return (
     <div className={"flex flex-column h-screen bg-blue-200"}>
@@ -16,10 +20,10 @@ const Game = () => {
         <Link href={"/setup"}>To Setup</Link>
         <div className="text-right">
           <p>
-            target score: <strong>50</strong>
+            target score: <strong>{setupInfo.targetScore}</strong>
           </p>
           <p>
-            starting player: <strong>{PlayerEnum.PLAYER_TWO}</strong>
+            starting player: <strong>{setupInfo.startingPlayer}</strong>
           </p>
         </div>
       </div>
@@ -32,8 +36,8 @@ const Game = () => {
         >
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_ONE}
-            playerName={"Shane"}
-            hasTurn={PlayerEnum.PLAYER_ONE}
+            playerName={setupInfo.playerOne}
+            hasTurn={setupInfo.startingPlayer}
           />
         </div>
         <div
@@ -42,8 +46,8 @@ const Game = () => {
         >
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_TWO}
-            playerName={"Earl"}
-            hasTurn={PlayerEnum.PLAYER_ONE}
+            playerName={setupInfo.playerTwo}
+            hasTurn={setupInfo.startingPlayer}
           />
         </div>
       </div>

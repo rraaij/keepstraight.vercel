@@ -8,25 +8,28 @@ import { RadioButton } from "primereact/radiobutton";
 import { useRouter } from "next/navigation";
 import { Card } from "primereact/card";
 import { InputNumber } from "primereact/inputnumber";
+import { useGameStore } from "@/store/game.store";
 
 const SetupForm = () => {
   const router = useRouter();
-  const [playerOne, setPlayerOne] = useState<string>("Player 1");
-  const [playerTwo, setPlayerTwo] = useState<string>("Player 2");
-  const [targetscore, setTargetscore] = useState<number>(50);
-  const [startingPlayer, setStartingPlayer] = useState<PlayerEnum>(
-    PlayerEnum.PLAYER_ONE
-  );
 
-  const startGame = () => {
-    console.log("START GAME", {
-      playerOne,
-      playerTwo,
-      targetscore,
-      startingPlayer,
-    });
-    // router.push("/game");
-  };
+  /**
+   * TODO https://dev.to/franklin030601/using-zustand-with-react-js-9di#3
+   * see if I should use Zustand's 'shallow' functionality
+   */
+  const [playerOne, setPlayerOne] = useState<string>(
+    useGameStore((state) => state.setup.playerOne)
+  );
+  const [playerTwo, setPlayerTwo] = useState<string>(
+    useGameStore((state) => state.setup.playerTwo)
+  );
+  const [targetScore, setTargetScore] = useState<number>(
+    useGameStore((state) => state.setup.targetScore)
+  );
+  const [startingPlayer, setStartingPlayer] = useState<PlayerEnum>(
+    useGameStore((state) => state.setup.startingPlayer)
+  );
+  const startGame = useGameStore((state) => state.startGame);
 
   return (
     <div className="p-4 pt-8 w-96">
@@ -57,17 +60,17 @@ const SetupForm = () => {
                 <Button
                   icon="pi pi-plus"
                   className="p-button-info"
-                  onClick={() => setTargetscore(targetscore + 5)}
+                  onClick={() => setTargetScore(targetScore + 5)}
                 />
                 <InputNumber
                   id={"target-score"}
                   className={"text-center"}
-                  value={targetscore}
+                  value={targetScore}
                 />
                 <Button
                   icon="pi pi-minus"
                   className="p-button-info"
-                  onClick={() => setTargetscore(targetscore - 5)}
+                  onClick={() => setTargetScore(targetScore - 5)}
                 />
               </div>
             </div>
@@ -109,7 +112,15 @@ const SetupForm = () => {
             icon={"pi pi-check"}
             raised
             size={"large"}
-            onClick={startGame}
+            onClick={() => {
+              startGame({
+                playerOne,
+                playerTwo,
+                targetScore,
+                startingPlayer,
+              });
+              router.push("/game");
+            }}
           />
         </div>
       </Card>

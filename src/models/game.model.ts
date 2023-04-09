@@ -22,3 +22,11 @@ export type ScoreUpdateInfo = {
   ballsOnTable: number;
   endedInFoul: boolean;
 };
+
+/**
+ * The Model used by the Zustand GameStore
+ */
+export type Game = {
+  setup: SetupInfo;
+  startGame: (setupInfo: SetupInfo) => void;
+};
