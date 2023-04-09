@@ -1,4 +1,4 @@
-import { PlayerEnum, Score } from "../models/game.model";
+import { PlayerEnum, Score } from "@/models/game.model";
 
 export const SCORE_DATA = <Score[]>[
   {
