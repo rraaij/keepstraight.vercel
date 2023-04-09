@@ -1,10 +1,11 @@
 import { Score, PlayerEnum } from "@/models/game.model";
 import { FC } from "react";
 import { SCORE_DATA } from "../../../../public/assets/score-data";
+import { useGameStore } from "@/store/game.store";
 
 const ScoreTable: FC<{ player: PlayerEnum }> = ({ player }) => {
-  const scoresForPlayer: Score[] = SCORE_DATA.filter(
-    (s) => s.player === player
+  const scoresForPlayer: Score[] = useGameStore((state) =>
+    state.scoreTable.getScoresForPlayer(player)
   );
 
   return (

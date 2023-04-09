@@ -10,10 +10,10 @@ const ScoreTableHeader: FC<{
     <div className="flex-grow px-2 pt-2">
       <div
         className={`text-center text-2xl font-extrabold p-2 ${
-          hasTurn === player ? "bg-amber-400" : "bg-white"
+          hasTurn === player ? "bg-yellow-200" : "bg-white"
         }`}
       >
-        {player}: {playerName}
+        {playerName}
       </div>
       <table className="w-full text-xl flex-grow">
         <thead className="bg-grey-50">

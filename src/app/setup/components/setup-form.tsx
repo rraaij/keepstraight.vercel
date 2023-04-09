@@ -1,35 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { PlayerEnum } from "@/models/game.model";
+import { useRouter } from "next/navigation";
+import { shallow } from "zustand/shallow";
+import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { RadioButton } from "primereact/radiobutton";
-import { useRouter } from "next/navigation";
-import { Card } from "primereact/card";
 import { InputNumber } from "primereact/inputnumber";
 import { useGameStore } from "@/store/game.store";
+import { PlayerEnum } from "@/models/game.model";
 
 const SetupForm = () => {
   const router = useRouter();
 
-  /**
-   * TODO https://dev.to/franklin030601/using-zustand-with-react-js-9di#3
-   * see if I should use Zustand's 'shallow' functionality
-   */
-  const [playerOne, setPlayerOne] = useState<string>(
-    useGameStore((state) => state.setup.playerOne)
+  const { setupInfo, startGame } = useGameStore(
+    (state) => ({ setupInfo: state.setup, startGame: state.startGame }),
+    shallow
   );
-  const [playerTwo, setPlayerTwo] = useState<string>(
-    useGameStore((state) => state.setup.playerTwo)
-  );
-  const [targetScore, setTargetScore] = useState<number>(
-    useGameStore((state) => state.setup.targetScore)
-  );
+  const [playerOne, setPlayerOne] = useState<string>(setupInfo.playerOne);
+  const [playerTwo, setPlayerTwo] = useState<string>(setupInfo.playerTwo);
+  const [targetScore, setTargetScore] = useState<number>(setupInfo.targetScore);
   const [startingPlayer, setStartingPlayer] = useState<PlayerEnum>(
-    useGameStore((state) => state.setup.startingPlayer)
+    setupInfo.startingPlayer
   );
-  const startGame = useGameStore((state) => state.startGame);
 
   return (
     <div className="p-4 pt-8 w-96">
