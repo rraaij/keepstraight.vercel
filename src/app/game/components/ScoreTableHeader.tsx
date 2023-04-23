@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { PlayerEnum } from "@/models/game.model";
+import { PlayerEnum } from "@/lib/game.model";
 
 const ScoreTableHeader: FC<{
   player: PlayerEnum;

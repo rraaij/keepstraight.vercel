@@ -1,9 +1,9 @@
 "use client";
 
 import { FC } from "react";
-import { PlayerEnum } from "@/models/game.model";
+import { PlayerEnum } from "@/lib/game.model";
 import { Button } from "primereact/button";
-import { useGameStore } from "@/store/game.store";
+import { useGameStore } from "@/lib/game.store";
 import { shallow } from "zustand/shallow";
 
 const ScoreTableFooter = () => {

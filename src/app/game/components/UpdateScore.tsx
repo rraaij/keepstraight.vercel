@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "primereact/button";
-import { useGameStore } from "@/store/game.store";
+import { useGameStore } from "@/lib/game.store";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useState } from "react";
 import { RadioButton } from "primereact/radiobutton";
-import { PlayerEnum } from "@/models/game.model";
+import { PlayerEnum } from "@/lib/game.model";
 import { Card } from "primereact/card";
 
 const UpdateScore = () => {

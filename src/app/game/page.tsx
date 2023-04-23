@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { PlayerEnum } from "@/models/game.model";
+import { PlayerEnum } from "@/lib/game.model";
 import ScoreTableHeader from "@/app/game/components/ScoreTableHeader";
 import ScoreTable from "@/app/game/components/ScoreTable";
 import ScoreTableFooter from "@/app/game/components/ScoreTableFooter";
 import UpdateScore from "@/app/game/components/UpdateScore";
-import { useGameStore } from "@/store/game.store";
+import { useGameStore } from "@/lib/game.store";
 import { shallow } from "zustand/shallow";
 
 const Game = () => {

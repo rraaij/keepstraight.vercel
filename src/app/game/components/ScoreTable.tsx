@@ -1,7 +1,7 @@
-import { Score, PlayerEnum } from "@/models/game.model";
+import { Score, PlayerEnum } from "@/lib/game.model";
 import { FC } from "react";
 import { SCORE_DATA } from "../../../../public/assets/score-data";
-import { useGameStore } from "@/store/game.store";
+import { useGameStore } from "@/lib/game.store";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 

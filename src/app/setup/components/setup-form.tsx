@@ -8,8 +8,8 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { RadioButton } from "primereact/radiobutton";
 import { InputNumber } from "primereact/inputnumber";
-import { useGameStore } from "@/store/game.store";
-import { PlayerEnum } from "@/models/game.model";
+import { useGameStore } from "@/lib/game.store";
+import { PlayerEnum } from "@/lib/game.model";
 
 const SetupForm = () => {
   const router = useRouter();

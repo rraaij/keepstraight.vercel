@@ -5,7 +5,7 @@ import {
   ScoreTable,
   ScoreUpdateInfo,
   SetupInfo,
-} from "@/models/game.model";
+} from "@/lib/game.model";
 // import { SCORE_DATA } from "../../public/assets/score-data";
 // scoreTable: new ScoreTable(SCORE_DATA),
 
