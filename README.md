@@ -1,36 +1,37 @@
 # Keepstraight
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
-
-First, run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+### Setup Prisma
+first enter the connect string to your mongodb instance in the .env file at DATABASE_URL.
+Then:
+```shell
+npx prisma db push
 ```
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Used Tech
-- React / Next.js 13
+### Used Tech
+- React / Next.js 13 (AppDir, backend API)
 - PrimeReact component library, PrimeFlex CSS Utility Classes
-
-## Want to use tech
 - Zustand State Management
+- Mongo database using Prisma
+
+### Want to use tech
+- NextAuth
 - Zod Validation Library
 - T3 Tech Stack - tRPC, Prisma, Supabase database (see Herrington Youtube)
-
+- Tanstack (React) Query ??
 
 ## Create a Next.js 13 app using pnpm
-```angular2html
+```shell
 pnpm create next-app@latest --experimental-app
 ```
+
+### Zustand info articles
+[dev.to: Using Zustand with React](https://dev.to/franklin030601/using-zustand-with-react-js-9di#3)
+
+# TODO LIST
+- score tables: use primereact table
+- default route / --> login page using next-auth: implement authentication
+- API using prisma to save data to MongoDB
+- score correction functionality
+- game overview page
+- player stats (avg run, performance against other player)

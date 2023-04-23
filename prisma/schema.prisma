@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String   @unique
+  player1Games Game[]   @relation("player1")
+  player2Games Game[]   @relation("player2")
+  Score        Score[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Game {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  player1        Player   @relation(fields: [player1Id], references: [id], name: "player1")
+  player1Id      String   @db.ObjectId
+  player2        Player   @relation(fields: [player2Id], references: [id], name: "player2")
+  player2Id      String   @db.ObjectId
+  targetScore    Int
+  startingPlayer Int
+  scores         Score[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Score {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  gameId    String   @db.ObjectId
+  game      Game     @relation(fields: [gameId], references: [id])
+  playerId  String   @db.ObjectId
+  player    Player   @relation(fields: [playerId], references: [id])
+  inning    Int
+  score     Int
+  foul      Boolean
+  createdAt DateTime @default(now())
+}

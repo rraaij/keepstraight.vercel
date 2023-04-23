@@ -1,13 +1,23 @@
-import React from "react";
+"use client";
+
 import Link from "next/link";
 import { PlayerEnum } from "@/models/game.model";
 import ScoreTableHeader from "@/app/game/components/ScoreTableHeader";
 import ScoreTable from "@/app/game/components/ScoreTable";
 import ScoreTableFooter from "@/app/game/components/ScoreTableFooter";
 import UpdateScore from "@/app/game/components/UpdateScore";
+import { useGameStore } from "@/store/game.store";
+import { shallow } from "zustand/shallow";
 
 const Game = () => {
-  const showUpdateScore = false;
+  const { setupInfo, playerAtTable, isUpdateScoreVisible } = useGameStore(
+    (state) => ({
+      setupInfo: state.setup,
+      playerAtTable: state.playerAtTable,
+      isUpdateScoreVisible: state.isUpdateScoreVisible,
+    }),
+    shallow
+  );
 
   return (
     <div className={"flex flex-column h-screen bg-blue-200"}>
@@ -16,24 +26,29 @@ const Game = () => {
         <Link href={"/setup"}>To Setup</Link>
         <div className="text-right">
           <p>
-            target score: <strong>50</strong>
+            target score: <strong>{setupInfo.targetScore}</strong>
           </p>
           <p>
-            starting player: <strong>{PlayerEnum.PLAYER_TWO}</strong>
+            starting player:{" "}
+            <strong>
+              {setupInfo.startingPlayer === PlayerEnum.PLAYER_ONE
+                ? setupInfo.playerOne
+                : setupInfo.playerTwo}
+            </strong>
           </p>
         </div>
       </div>
 
       {/*TABLE HEADERS*/}
-      <div className="flex flex-row flex-wrap justify-content-between align-items-stretch flex-grow-1">
+      <div className="flex flex-row flex-wrap justify-content-between align-items-stretch">
         <div
           style={{ width: "50%" }}
           className="p-2 bg-white border-x-1 border-blue-200 flex flex-column justify-content-end"
         >
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_ONE}
-            playerName={"Shane"}
-            hasTurn={PlayerEnum.PLAYER_ONE}
+            playerName={setupInfo.playerOne}
+            hasTurn={playerAtTable}
           />
         </div>
         <div
@@ -42,8 +57,8 @@ const Game = () => {
         >
           <ScoreTableHeader
             player={PlayerEnum.PLAYER_TWO}
-            playerName={"Earl"}
-            hasTurn={PlayerEnum.PLAYER_ONE}
+            playerName={setupInfo.playerTwo}
+            hasTurn={playerAtTable}
           />
         </div>
       </div>
@@ -66,8 +81,8 @@ const Game = () => {
 
       {/*FOOTER*/}
       <div className={"mt-auto"}>
-        {!showUpdateScore && <ScoreTableFooter />}
-        {showUpdateScore && <UpdateScore />}
+        {!isUpdateScoreVisible && <ScoreTableFooter />}
+        {isUpdateScoreVisible && <UpdateScore />}
       </div>
     </div>
   );

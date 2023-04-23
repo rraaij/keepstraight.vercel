@@ -1,32 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { PlayerEnum } from "@/models/game.model";
+import { useRouter } from "next/navigation";
+import { shallow } from "zustand/shallow";
+import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { RadioButton } from "primereact/radiobutton";
-import { useRouter } from "next/navigation";
-import { Card } from "primereact/card";
 import { InputNumber } from "primereact/inputnumber";
+import { useGameStore } from "@/store/game.store";
+import { PlayerEnum } from "@/models/game.model";
 
 const SetupForm = () => {
   const router = useRouter();
-  const [playerOne, setPlayerOne] = useState<string>("Player 1");
-  const [playerTwo, setPlayerTwo] = useState<string>("Player 2");
-  const [targetscore, setTargetscore] = useState<number>(50);
-  const [startingPlayer, setStartingPlayer] = useState<PlayerEnum>(
-    PlayerEnum.PLAYER_ONE
-  );
 
-  const startGame = () => {
-    console.log("START GAME", {
-      playerOne,
-      playerTwo,
-      targetscore,
-      startingPlayer,
-    });
-    // router.push("/game");
-  };
+  const { setupInfo, startGame } = useGameStore(
+    (state) => ({ setupInfo: state.setup, startGame: state.startGame }),
+    shallow
+  );
+  const [playerOne, setPlayerOne] = useState<string>(setupInfo.playerOne);
+  const [playerTwo, setPlayerTwo] = useState<string>(setupInfo.playerTwo);
+  const [targetScore, setTargetScore] = useState<number>(setupInfo.targetScore);
+  const [startingPlayer, setStartingPlayer] = useState<PlayerEnum>(
+    setupInfo.startingPlayer
+  );
 
   return (
     <div className="p-4 pt-8 w-96">
@@ -57,17 +54,17 @@ const SetupForm = () => {
                 <Button
                   icon="pi pi-plus"
                   className="p-button-info"
-                  onClick={() => setTargetscore(targetscore + 5)}
+                  onClick={() => setTargetScore(targetScore + 5)}
                 />
                 <InputNumber
                   id={"target-score"}
                   className={"text-center"}
-                  value={targetscore}
+                  value={targetScore}
                 />
                 <Button
                   icon="pi pi-minus"
                   className="p-button-info"
-                  onClick={() => setTargetscore(targetscore - 5)}
+                  onClick={() => setTargetScore(targetScore - 5)}
                 />
               </div>
             </div>
@@ -109,7 +106,15 @@ const SetupForm = () => {
             icon={"pi pi-check"}
             raised
             size={"large"}
-            onClick={startGame}
+            onClick={() => {
+              startGame({
+                playerOne,
+                playerTwo,
+                targetScore,
+                startingPlayer,
+              });
+              router.push("/game");
+            }}
           />
         </div>
       </Card>
