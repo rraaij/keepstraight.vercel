@@ -15,16 +15,6 @@ const ScoreTableHeader: FC<{
       >
         {playerName}
       </div>
-      <table className="w-full text-xl flex-grow">
-        <thead className="bg-grey-50">
-          <tr>
-            <th className="font-medium text-gray-500 text-center text-sm">T</th>
-            <th className="font-medium text-gray-500 text-center text-sm">#</th>
-            <th className="font-medium text-gray-500 text-center text-sm">F</th>
-            <th className="font-medium text-gray-500 text-right text-sm">S</th>
-          </tr>
-        </thead>
-      </table>
     </div>
   );
 };

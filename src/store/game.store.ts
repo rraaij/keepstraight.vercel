@@ -6,7 +6,8 @@ import {
   ScoreUpdateInfo,
   SetupInfo,
 } from "@/models/game.model";
-import { SCORE_DATA } from "../../public/assets/score-data";
+// import { SCORE_DATA } from "../../public/assets/score-data";
+// scoreTable: new ScoreTable(SCORE_DATA),
 
 export const useGameStore = create<Game>((set) => ({
   setup: {

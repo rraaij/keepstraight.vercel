@@ -19,6 +19,7 @@ npx prisma db push
 - Zod Validation Library
 - T3 Tech Stack - tRPC, Prisma, Supabase database (see Herrington Youtube)
 - Tanstack (React) Query ??
+- Playwright e2e testing
 
 ## Create a Next.js 13 app using pnpm
 ```shell

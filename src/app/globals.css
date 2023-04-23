@@ -12,3 +12,8 @@
 html, body {
     height: 100%
 }
+
+.p-datatable {
+    width: inherit;
+    overflow-x: hidden;
+}

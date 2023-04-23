@@ -64,17 +64,11 @@ const Game = () => {
       </div>
 
       {/*TABLE CONTENTS*/}
-      <div className="flex flex-row flex-grow-1 overflow-y-auto bg-white">
-        <div
-          style={{ width: "50%" }}
-          className={"p-2 border-x-1 border-blue-200"}
-        >
+      <div className="flex flex-row flex-grow-1 bg-white">
+        <div style={{ width: "50%" }} className={"border-x-1 border-blue-200"}>
           <ScoreTable player={PlayerEnum.PLAYER_ONE} />
         </div>
-        <div
-          style={{ width: "50%" }}
-          className={"p-2 border-x-1 border-blue-200"}
-        >
+        <div style={{ width: "50%" }} className={"border-x-1 border-blue-200"}>
           <ScoreTable player={PlayerEnum.PLAYER_TWO} />
         </div>
       </div>
