@@ -20,7 +20,10 @@ const Game = () => {
   );
 
   return (
-    <div className={"flex flex-column h-screen bg-blue-200"}>
+    <div
+      className={"flex flex-column h-screen bg-blue-200"}
+      style={{ maxHeight: "-webkit-fill-available" }}
+    >
       {/*HEADER*/}
       <div className="flex flex-row justify-content-between py-4 px-3">
         <Link href={"/setup"}>To Setup</Link>
@@ -64,17 +67,11 @@ const Game = () => {
       </div>
 
       {/*TABLE CONTENTS*/}
-      <div className="flex flex-row flex-grow-1 overflow-y-auto bg-white">
-        <div
-          style={{ width: "50%" }}
-          className={"p-2 border-x-1 border-blue-200"}
-        >
+      <div className="flex flex-row flex-grow-1 bg-white">
+        <div style={{ width: "50%" }} className={"border-x-1 border-blue-200"}>
           <ScoreTable player={PlayerEnum.PLAYER_ONE} />
         </div>
-        <div
-          style={{ width: "50%" }}
-          className={"p-2 border-x-1 border-blue-200"}
-        >
+        <div style={{ width: "50%" }} className={"border-x-1 border-blue-200"}>
           <ScoreTable player={PlayerEnum.PLAYER_TWO} />
         </div>
       </div>
