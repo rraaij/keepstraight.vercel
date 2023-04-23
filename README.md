@@ -13,13 +13,13 @@ npx prisma db push
 - PrimeReact component library, PrimeFlex CSS Utility Classes
 - Zustand State Management
 - Mongo database using Prisma
+- next-intl i18n internationalization nl-en
 
 ### Want to use tech
 - NextAuth
 - Zod Validation Library
 - Tanstack (React) Query ??
 - Playwright e2e testing
-- next-intl i18n internationalization nl-en
 
 ## Create a Next.js 13 app using pnpm
 ```shell
@@ -30,7 +30,7 @@ pnpm create next-app@latest --experimental-app
 [dev.to: Using Zustand with React](https://dev.to/franklin030601/using-zustand-with-react-js-9di#3)
 
 # TODO LIST
-- score tables: use primereact table
+- ~~score tables: use primereact table~~
 - default route / --> login page using next-auth: implement authentication
 - API using prisma to save data to MongoDB
 - score correction functionality
