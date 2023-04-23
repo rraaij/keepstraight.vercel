@@ -1,12 +1,21 @@
 # Keepstraight
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Used Tech
-- React / Next.js 13
-- PrimeReact component library, PrimeFlex CSS Utility Classes
+### Setup Prisma
+first enter the connect string to your mongodb instance in the .env file at DATABASE_URL.
+Then:
+```shell
+npx prisma db push
+```
 
-## Want to use tech
+### Used Tech
+- React / Next.js 13 (AppDir, backend API)
+- PrimeReact component library, PrimeFlex CSS Utility Classes
 - Zustand State Management
+- Mongo database using Prisma
+
+### Want to use tech
+- NextAuth
 - Zod Validation Library
 - T3 Tech Stack - tRPC, Prisma, Supabase database (see Herrington Youtube)
 
@@ -20,5 +29,5 @@ pnpm create next-app@latest --experimental-app
 
 # TODO LIST
 - score tables: use primereact table
-- default route / --> go to /setup
-- 
+- default route / --> login page using next-auth: implement authentication
+- API using prisma to save data to MongoDB
