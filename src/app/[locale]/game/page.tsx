@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { PlayerEnum } from "@/lib/game.model";
-import ScoreTableHeader from "@/app/game/components/ScoreTableHeader";
-import ScoreTable from "@/app/game/components/ScoreTable";
-import ScoreTableFooter from "@/app/game/components/ScoreTableFooter";
-import UpdateScore from "@/app/game/components/UpdateScore";
+import ScoreTableHeader from "@/app/[locale]/game/components/ScoreTableHeader";
+import ScoreTable from "@/app/[locale]/game/components/ScoreTable";
+import ScoreTableFooter from "@/app/[locale]/game/components/ScoreTableFooter";
+import UpdateScore from "@/app/[locale]/game/components/UpdateScore";
 import { useGameStore } from "@/lib/game.store";
 import { shallow } from "zustand/shallow";
+import LanguageSelector from "@/components/language-selector";
 
 const Game = () => {
   const { setupInfo, playerAtTable, isUpdateScoreVisible } = useGameStore(
@@ -27,6 +28,7 @@ const Game = () => {
       {/*HEADER*/}
       <div className="flex flex-row justify-content-between py-4 px-3">
         <Link href={"/setup"}>To Setup</Link>
+        <LanguageSelector />
         <div className="text-right">
           <p>
             target score: <strong>{setupInfo.targetScore}</strong>
