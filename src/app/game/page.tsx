@@ -20,7 +20,10 @@ const Game = () => {
   );
 
   return (
-    <div className={"flex flex-column h-screen bg-blue-200"}>
+    <div
+      className={"flex flex-column h-screen bg-blue-200"}
+      style={{ maxHeight: "-webkit-fill-available" }}
+    >
       {/*HEADER*/}
       <div className="flex flex-row justify-content-between py-4 px-3">
         <Link href={"/setup"}>To Setup</Link>
