@@ -11,7 +11,8 @@ type Props = {
 };
 
 export const generateMetadata = async ({ params: { locale } }: Props) => {
-  const messages = (await import(`../../translations/${locale}.json`)).default;
+  const messages = (await import(`../../../translations/${locale}.json`))
+    .default;
 
   const t = createTranslator({ locale, messages });
 
@@ -24,7 +25,7 @@ export const generateMetadata = async ({ params: { locale } }: Props) => {
 const LocaleLayout = async ({ children, params: { locale } }: Props) => {
   let messages;
   try {
-    messages = (await import(`../../translations/${locale}.json`)).default;
+    messages = (await import(`../../../translations/${locale}.json`)).default;
   } catch (error) {
     notFound();
   }

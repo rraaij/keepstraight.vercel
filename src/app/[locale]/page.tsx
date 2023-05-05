@@ -1,14 +1,12 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "./page.module.css";
 import LanguageSelector from "@/components/language-selector";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const t = useTranslations("metadata");
   return (
     <main>
-      <h1>Keepstraight: Login</h1>
+      <h1>{t("title")}</h1>
+      <p>{t("description")}</p>
       <LanguageSelector />
     </main>
   );

@@ -8,6 +8,7 @@ import { PrismaClient } from "@prisma/client/scripts/default-index";
 // exhausting your database connection limit.
 //
 // Learn more:
+// https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices
 // https://pris.ly/d/help/next-js-best-practices
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
