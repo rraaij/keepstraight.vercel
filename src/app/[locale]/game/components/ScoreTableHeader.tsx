@@ -1,19 +1,31 @@
+"use client";
+
 import { FC } from "react";
 import { PlayerEnum } from "@/lib/game.model";
+import { shallow } from "zustand/shallow";
+import { useGameStore } from "@/lib/game.store";
 
 const ScoreTableHeader: FC<{
   player: PlayerEnum;
-  playerName: string | undefined;
-  hasTurn: PlayerEnum;
-}> = ({ player, playerName, hasTurn }) => {
+}> = ({ player }) => {
+  const { setupInfo, playerAtTable } = useGameStore(
+    (state) => ({
+      setupInfo: state.setup,
+      playerAtTable: state.playerAtTable,
+    }),
+    shallow
+  );
+
   return (
     <div className="flex-grow px-2 pt-2">
       <div
         className={`text-center text-2xl font-extrabold p-2 ${
-          hasTurn === player ? "bg-yellow-200" : "bg-white"
+          playerAtTable === player ? "bg-yellow-200" : "bg-white"
         }`}
       >
-        {playerName}
+        {player === PlayerEnum.PLAYER_ONE
+          ? setupInfo.playerOne
+          : setupInfo.playerTwo}
       </div>
     </div>
   );
