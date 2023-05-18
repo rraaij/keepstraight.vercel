@@ -1,26 +1,31 @@
 "use client";
 
-import { FC } from "react";
 import { PlayerEnum } from "@/lib/game.model";
 import { Button } from "primereact/button";
 import { useGameStore } from "@/lib/game.store";
 import { shallow } from "zustand/shallow";
+import UpdateScore from "@/app/[locale]/game/components/UpdateScore";
 
 const ScoreTableFooter = () => {
   const getCurrentScore = (player: PlayerEnum): number => {
     // TODO: ophalen uit ScoreTable class.
     return 1;
   };
-  const { possibleRun, rerack, showUpdateScore, scoreTable } = useGameStore(
-    (state) => ({
-      possibleRun: state.possibleRun,
-      rerack: state.rerack,
-      showUpdateScore: state.showUpdateScore,
-      scoreTable: state.scoreTable,
-    }),
-    shallow
-  );
+  const { possibleRun, rerack, showUpdateScore, scoreTable, showUpdate } =
+    useGameStore(
+      (state) => ({
+        possibleRun: state.possibleRun,
+        rerack: state.rerack,
+        showUpdateScore: state.showUpdateScore,
+        scoreTable: state.scoreTable,
+        showUpdate: state.isUpdateScoreVisible,
+      }),
+      shallow
+    );
 
+  if (showUpdate) {
+    return <UpdateScore />;
+  }
   return (
     <div className="text-center bg-blue-200 py-2">
       <div className="flex flex-row flex-wrap justify-content-between align-items-stretch flex-grow-1">

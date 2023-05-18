@@ -1,3 +1,5 @@
+"use client";
+
 import { Score, PlayerEnum } from "@/lib/game.model";
 import { FC } from "react";
 import { SCORE_DATA } from "../../../../../public/assets/score-data";
