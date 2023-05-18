@@ -33,6 +33,8 @@ pnpm create next-app@latest --experimental-app
 - ~~score tables: use primereact table~~
 - default route / --> login page using next-auth: implement authentication
 - API using prisma to save data to MongoDB
+- FIX game page: page should be serverside, components client side
 - score correction functionality
 - game overview page
 - player stats (avg run, performance against other player)
+- next-intl still uses 2.14.beta.4 - fix implementation with 2.15 (or higher)

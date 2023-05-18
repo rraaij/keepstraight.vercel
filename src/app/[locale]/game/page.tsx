@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { PlayerEnum } from "@/lib/game.model";
 import ScoreTableHeader from "@/app/[locale]/game/components/ScoreTableHeader";
@@ -9,6 +7,10 @@ import UpdateScore from "@/app/[locale]/game/components/UpdateScore";
 import { useGameStore } from "@/lib/game.store";
 import { shallow } from "zustand/shallow";
 import LanguageSelector from "@/components/language-selector";
+
+// export const revalidate = 0; // SSR, so no caching
+//
+// export async function generateMetaData() {}
 
 const Game = () => {
   const { setupInfo, playerAtTable, isUpdateScoreVisible } = useGameStore(
