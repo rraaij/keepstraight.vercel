@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// to sync the mongo db with this schema:  `npx prisma db push`
+// re-establish link between this schema and .env.local file: `npx prisma generate`
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,13 +14,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  email     String
-  playerId  String   @db.ObjectId
-  player    Player   @relation(fields: [playerId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String    @unique
+  email          String    @unique
+  emailVerified  DateTime?
+  hashedPassword String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  player         Player?
 }
 
 model Player {
@@ -28,7 +32,8 @@ model Player {
   Score        Score[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  User         User[]
+  userId       String   @unique @db.ObjectId
+  User         User     @relation(fields: [userId], references: [id])
 }
 
 model Game {
