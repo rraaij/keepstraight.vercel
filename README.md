@@ -3,8 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### mongodb atlas [login: google]
 cluster: ks-cluster
-mongodb+srv://admin:mz4DZdfE1kvxlUEx@ks-cluster.zbdze50.mongodb.net/keepstraight
-username: admin pwd: mz4DZdfE1kvxlUEx
+mongodb+srv://admin:<password>@ks-cluster.zbdze50.mongodb.net/keepstraight
 
 ### Setup Prisma
 first enter the connect string to your mongodb instance in the .env file at DATABASE_URL.
