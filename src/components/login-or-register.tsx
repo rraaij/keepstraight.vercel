@@ -6,7 +6,7 @@ import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Toast } from "primereact/toast";
 
@@ -159,6 +159,15 @@ const LoginOrRegister = () => {
               size={"large"}
               onClick={loginOrRegister}
             />
+            {isLogin && (
+              <Button
+                link
+                className={"w-full pt-4"}
+                label={"Uitloggen"}
+                icon={"pi pi-arrow-right"}
+                onClick={() => signOut()}
+              />
+            )}
             <Button
               link
               className={"w-full pt-4"}

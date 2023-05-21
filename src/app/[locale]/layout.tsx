@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { createTranslator, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { Roboto } from "next/font/google";
+import { NextAuthProvider } from "@/components/next-auth-provider";
 
 const font = Roboto({ subsets: ["latin"], weight: "400" });
 
@@ -33,9 +34,11 @@ const LocaleLayout = async ({ children, params: { locale } }: Props) => {
   return (
     <html lang={locale}>
       <body className={font.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <NextAuthProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

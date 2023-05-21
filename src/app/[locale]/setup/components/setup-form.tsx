@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { shallow } from "zustand/shallow";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
@@ -13,6 +14,7 @@ import { PlayerEnum } from "@/lib/game.model";
 
 const SetupForm = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const { setupInfo, startGame } = useGameStore(
     (state) => ({ setupInfo: state.setup, startGame: state.startGame }),
@@ -39,6 +41,7 @@ const SetupForm = () => {
                 onChange={(e) => setPlayerOne(e.target.value)}
               />
             </div>
+
             <div className="field">
               <label htmlFor="player-two">Player Two</label>
               <InputText
@@ -48,6 +51,7 @@ const SetupForm = () => {
                 onChange={(e) => setPlayerTwo(e.target.value)}
               />
             </div>
+
             <div className="field">
               <label htmlFor="target-score">Target Score</label>
               <div className="p-inputgroup">
@@ -68,6 +72,7 @@ const SetupForm = () => {
                 />
               </div>
             </div>
+
             <div className="flex justify-content-between">
               <p className="self-center">Who Starts?</p>
               <div className="flex flex-wrap gap-3">
@@ -99,6 +104,7 @@ const SetupForm = () => {
             </div>
           </div>
         </div>
+
         <div className="pt-4">
           <Button
             className={"w-full"}
@@ -117,6 +123,7 @@ const SetupForm = () => {
             }}
           />
         </div>
+        <pre>{JSON.stringify(session, null, 2)}</pre>
       </Card>
     </div>
   );
