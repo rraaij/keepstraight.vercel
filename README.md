@@ -42,3 +42,5 @@ pnpm create next-app@latest --experimental-app
 - game overview page
 - player stats (avg run, performance against other player)
 - next-intl still uses 2.14.beta.4 - fix implementation with 2.15 (or higher)
+
+XXX test XXX
